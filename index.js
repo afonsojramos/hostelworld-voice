@@ -8,7 +8,16 @@ const googleMapsClient = require('@google/maps').createClient({
     key: 'AIzaSyA_ioaEbPgfOjBB2DWiW-P4RJcCBEpaPP8',
     Promise: Promise
 });
-//const {Card, Suggestion} = require('dialogflow-fulfillment');
+const {
+    dialogflow,
+    SimpleResponse,
+    BasicCard,
+    Suggestions,
+    Permission,
+    UpdatePermission,
+    RegisterUpdate,
+    Carousel
+} = require('actions-on-google');
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
@@ -31,8 +40,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     
         return googleMapsClient.places({ query: `${city}`, type: 'museum' }).asPromise()
             .then((response) => {
-                console.log(response.json.results[0]);
-                return Promise.resolve(response.json.results[0].name);
+                console.log(response.json.results);
+                return Promise.resolve(response.json.results);
             })
             .catch((err) => {
                 console.log(Promise.reject(err));
@@ -50,7 +59,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 return Promise.resolve(response);
             })
             .catch((err) => {
-                agent.add("Uh oh, something is wrong *bleeds*");
+                agent.add("Uh oh, something is wrong *bleeds*" + err);
                 return Promise.resolve(err);
             });
     }
