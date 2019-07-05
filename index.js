@@ -37,11 +37,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     const getNearbyMuseums = (city) => {
         console.log("> getNearbyMuseums City: " + city);
-    
+
         return googleMapsClient.places({ query: `${city}`, type: 'museum' }).asPromise()
             .then((response) => {
                 console.log(response.json.results);
-                return Promise.resolve(response.json.results);
+                return Promise.resolve(response.json.results.slice(0, 3));
             })
             .catch((err) => {
                 console.log(Promise.reject(err));
