@@ -16,6 +16,7 @@ const {
     Permission,
     UpdatePermission,
     RegisterUpdate,
+    List,
     Carousel
 } = require('actions-on-google');
 
@@ -23,8 +24,9 @@ process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     const agent = new WebhookClient({ request, response });
-    console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
-    console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
+    //agent.requestSource = agent.ACTIONS_ON_GOOGLE;
+    //console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
+    //console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
     function welcome(agent) {
         agent.add(`Welcome to my agent!`);
@@ -49,13 +51,84 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     };
 
     function activitiesHandler(agent) {
-        const params = agent.getContext('booking-context').parameters;
+        const params = agent.context.get('booking-context').parameters;
         const city = params['geo-city'];
         //agent.add('My name is Dialogflow!' + city);
+        let conv = agent.conv();
+        console.log(conv);
 
         return getNearbyMuseums(city)
             .then((response) => {
-                agent.add(response);
+                console.log(`This was my response : ${JSON.stringify(response)}`);
+
+                if (!conv.screen) {
+                    conv.ask('Sorry, try this on a screen device or select the phone surface in the simulator.');
+                    return;
+                }
+                console.log(2);
+
+                conv.ask(`I highly recommend you to visit ${response[0].name}, but visiting ${response[1].name} or ${response[2].name} should also be tremendously fun!`);
+                console.log(3);
+                /* conv.ask(new Carousel({
+                    items: {
+                        'OptionOne': {
+                            title: `${response[0].name}`,
+                            description: `${response[0].rating} stars!`,
+                            image: {
+                                url: `${response[0].icon}`,
+                                alt: `${response[0].name}`,
+                            },
+                        },
+                        'OptionTwo': {
+                            title: `${response[1].name}`,
+                            description: `${response[1].rating} stars!`,
+                            image: {
+                                url: `${response[1].icon}`,
+                                alt: `${response[1].name}`,
+                            },
+                        },
+                        'OptionThree': {
+                            title: `${response[2].name}`,
+                            description: `${response[2].rating} stars!`,
+                            image: {
+                                url: `${response[2].icon}`,
+                                alt: `${response[2].name}`,
+                            },
+                        },
+                    },
+                })); */
+                /* conv.ask(new List({
+                    title: 'List Title',
+                    items: {
+                        'OptionOne': {
+                            title: `${response[0].name}`,
+                            description: `${response[0].rating} stars!`,
+                            image: {
+                                url: `${response[0].icon}`,
+                                alt: `${response[0].name}`,
+                            },
+                        },
+                        'OptionTwo': {
+                            title: `${response[1].name}`,
+                            description: `${response[1].rating} stars!`,
+                            image: {
+                                url: `${response[1].icon}`,
+                                alt: `${response[1].name}`,
+                            },
+                        },
+                        'OptionThree': {
+                            title: `${response[2].name}`,
+                            description: `${response[2].rating} stars!`,
+                            image: {
+                                url: `${response[2].icon}`,
+                                alt: `${response[2].name}`,
+                            },
+                        },
+                    },
+                })); */
+                console.log(4);
+                agent.add(conv);
+                console.log(5);
                 return Promise.resolve(response);
             })
             .catch((err) => {
