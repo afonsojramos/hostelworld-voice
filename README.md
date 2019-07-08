@@ -1,5 +1,13 @@
 # Hostelworld Voice Assistant Integration
 
+## Index
+
+1. [Platforms](##Platforms)
+    1. [Platform Choices](##Platform-Choices)
+    2. [Platform Performance](##Platform-Performance)
+    3. [Platform Choice Conclusion](##Platform-Choice-Conclusion)
+2. [Dialogflow Implementation](##Dialogflow-Implementation)
+
 ## Platforms
 
 There are many platforms and tools available at our disposal, some required the whole Natural Language Processing (NLP) to be developed from scratch, others allowed the focus to be on User Experience (UX). 
