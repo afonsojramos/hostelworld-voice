@@ -31,5 +31,31 @@ However, Dialogflow has since updated their API to version 2, as well as given o
 
 ### Platform Choice Conclusion
 
+In the end, we ended up with two great options, **Dialogflow** and **Rasa NLU**, both of which have great performance and complete with all the necessary features. 
+While Dialogflow is a complete closed source product with a fully functional API and graphical web interface.
+Rasa (NLU + Core) are Open-Source Python libraries that require slightly lower level development. But, in the end, both try to abstract some of the difficulty of working with Machine Learning to build a chatbot.
+
+All in all, it comes to the following differences:
+
+***Dialogflow***
+
+* Most complete tool for the creation of a chatbot, doing almost everything you need for most chatbots.
+* Handles classification of `intents` and `entities`, and uses what it calls `context` to handle `dialogue`. Allows webhooks for `fulfillment`.
+* One thing it does not have that is often desirable for chatbots is some form of end user management.
+* It has a robust API, which allows you to define `entities`/`intents`/etc either via the API or their web based interface.
+* Cannot be operated on premise. 
+
+***Rasa NLU + Core***
+
+* To get close to the same level of fucntionality as Dialogflow you have to use both Rasa NLU and Rasa Core. Rasa NLU handles `projects`/`intents`/`entities` whereas Rasa Core handles `dialogue` and `fulfillment`.
+* Rasa doesn't provide a complete open source GUI leaving most of your interactions with NLU in JSON or markdown. And Rasa Core requires direct python development to customize your bot.
+* Also does not directly offer any sort of user info management.
+* The Rasa team does not provide hosting (at least outside of their enterprise offerings) and you will be **responsible for hosting** and thus **ownership of the data**.
+* Can be operated on premise.
+
+Taking these differences into account, **Dialogflow** is the most complete, and thus, the obvious choice for assistant development.
+However, there is a full-featured bot framework called [**Articulate**](https://spg.ai/projects/articulate/) that is being developed on [GitHub](https://github.com/samtecspg/articulate) which: uses **Rasa NLU** for understanding and custom context based code for dialog, making it work closer to how **Dialogflow** does than **Rasa Core**; `HTTP API` for creating `intents`, `entities`, and interacting with `agents`; GUI similar to Dialogflow that is fully open source; and the data and interface can be hosted in the cloud or on premise. 
+
+It is hard to say what to expect of the future, and impossible to predict which platform will become the best and most complete one, since Articulate, being Open-Source, might overrun Dialogflow, but Dialogflow can also go Open-Source, making the future uncertain. Nevertheless, for now, Dialogflow wins and it will be our pick.
 
 ## Dialogflow Implementation
