@@ -4,7 +4,7 @@
 
 const functions = require('firebase-functions');
 const { WebhookClient } = require('dialogflow-fulfillment');
-const placesAPIkey = `AIzaSyA_ioaEbPgfOjBB2DWiW-P4RJcCBEpaPP8`
+const placesAPIkey = `AIzaSyA_ioaEbPgfOjBB2DWiW-P4RJcCBEpaPP8`;
 const googleMapsClient = require('@google/maps').createClient({
     key: placesAPIkey,
     Promise: Promise
@@ -82,8 +82,24 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             title: `${response[1].name}`,
                             description: `${response[1].rating} stars!`,
                             image: {
-                                url: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=${response[1].photos[0].photo_reference}&key=${placesAPIkey}`,
+                                url: `https://maps.googleapis.com/maps/api/place/photo?maxheight=800&photoreference=${response[1].photos[0].photo_reference}&key=${placesAPIkey}`,
                                 accessibilityText: `${response[1].name}`
+                            },
+                        },
+                        'OptionThree': {
+                            title: `${response[2].name}`,
+                            description: `${response[2].rating} stars!`,
+                            image: {
+                                url: `https://maps.googleapis.com/maps/api/place/photo?maxheight=800&photoreference=${response[2].photos[0].photo_reference}&key=${placesAPIkey}`,
+                                accessibilityText: `${response[2].name}`
+                            },
+                        },
+                        'OptionFour': {
+                            title: `${response[3].name}`,
+                            description: `${response[3].rating} stars!`,
+                            image: {
+                                url: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=${response[3].photos[0].photo_reference}&key=${placesAPIkey}`,
+                                accessibilityText: `${response[3].name}`
                             },
                         },
                     },
