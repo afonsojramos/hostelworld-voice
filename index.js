@@ -65,70 +65,29 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                     conv.ask('Sorry, try this on a screen device or select the phone surface in the simulator.');
                     return;
                 }
-                console.log(2);
-
                 conv.ask(`I highly recommend you to visit ${response[0].name}, but visiting ${response[1].name} or ${response[2].name} should also be tremendously fun!`);
-                console.log(3);
-                /* conv.ask(new Carousel({
+                conv.ask(new Carousel({
+                    title: 'Google Assistant',
                     items: {
-                        'OptionOne': {
+                        'WorksWithGoogleAssistantItemKey': {
                             title: `${response[0].name}`,
                             description: `${response[0].rating} stars!`,
                             image: {
-                                url: `${response[0].icon}`,
-                                alt: `${response[0].name}`,
+                                url: response[0].icon,
+                                accessibilityText: `${response[0].name}`,
                             },
                         },
-                        'OptionTwo': {
+                        'GoogleHomeItemKey': {
                             title: `${response[1].name}`,
                             description: `${response[1].rating} stars!`,
                             image: {
-                                url: `${response[1].icon}`,
-                                alt: `${response[1].name}`,
-                            },
-                        },
-                        'OptionThree': {
-                            title: `${response[2].name}`,
-                            description: `${response[2].rating} stars!`,
-                            image: {
-                                url: `${response[2].icon}`,
-                                alt: `${response[2].name}`,
+                                url: response[1].icon,
+                                accessibilityText: `${response[1].name}`
                             },
                         },
                     },
-                })); */
-                /* conv.ask(new List({
-                    title: 'List Title',
-                    items: {
-                        'OptionOne': {
-                            title: `${response[0].name}`,
-                            description: `${response[0].rating} stars!`,
-                            image: {
-                                url: `${response[0].icon}`,
-                                alt: `${response[0].name}`,
-                            },
-                        },
-                        'OptionTwo': {
-                            title: `${response[1].name}`,
-                            description: `${response[1].rating} stars!`,
-                            image: {
-                                url: `${response[1].icon}`,
-                                alt: `${response[1].name}`,
-                            },
-                        },
-                        'OptionThree': {
-                            title: `${response[2].name}`,
-                            description: `${response[2].rating} stars!`,
-                            image: {
-                                url: `${response[2].icon}`,
-                                alt: `${response[2].name}`,
-                            },
-                        },
-                    },
-                })); */
-                console.log(4);
+                }));
                 agent.add(conv);
-                console.log(5);
                 return Promise.resolve(response);
             })
             .catch((err) => {
@@ -141,7 +100,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     let intentMap = new Map();
     intentMap.set('Default Welcome Intent', welcome);
     intentMap.set('Default Fallback Intent', fallback);
-    intentMap.set('Activities', activitiesHandler);
+    if (agent.requestSource === agent.ACTIONS_ON_GOOGLE) {
+        intentMap.set('Activities', activitiesHandler);
+    } /* else {
+        intentMap.set(null, other);
+    } */
     // intentMap.set('your intent name here', googleAssistantHandler);
     agent.handleRequest(intentMap);
 });
