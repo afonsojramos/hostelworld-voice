@@ -2,18 +2,18 @@
 
 ## Index
 
-1. [Platforms](##Platforms)
+1. [Platforms](#Platforms)
     1. [Platform Choices](##Platform-Choices)
     2. [Platform Performance](##Platform-Performance)
     3. [Platform Choice Conclusion](##Platform-Choice-Conclusion)
-2. [Dialogflow Implementation](##Dialogflow-Implementation)
+2. [Dialogflow Implementation](#Dialogflow-Implementation)
 
-## Platforms
+# Platforms
 
 There are many platforms and tools available at our disposal, some required the whole Natural Language Processing (NLP) to be developed from scratch, others allowed the focus to be on User Experience (UX). 
 But what we are truly looking for is a Natural Language Understanding (NLU) library, that can deal with machine reading comprehension, *ie* the post-processing of text. 
 
-### Platform Choices
+## Platform Choices
 
 A few of the best Natural Language Understanding libraries in the market are [Snips NLU](https://snips-nlu.readthedocs.io/en/latest/index.html), which is a Python Open-Source library, [Rasa NLU](https://rasa.com/docs/), which is another great Python Open-Source library. 
 Then we have some Closed-Source libraries like [LUIS.ai](https://docs.microsoft.com/en-gb/azure/cognitive-services/luis/what-is-luis) from Microsoft, [Alexa Custom Skills Kit](https://developer.amazon.com/docs/custom-skills) from Amazon and [Dialogflow](http://dialogflow.com/docs/) (previously Api.ai) from Google. 
@@ -24,7 +24,7 @@ However, since developing platform specific voice assistants is rather troubleso
 We are then reduced to fully using Dialogflow, which obviously has a good integration with Google Assistant, and Rasa, which has a great [tutorial](https://blog.rasa.com/going-beyond-hey-google-building-a-rasa-powered-google-assistant/) to integrate Rasa developed models with Dialogflow, and, in turn, Google Assistant. 
 Both of these allow us to parse sentences written in natural language and extract information in a structured way.
 
-### Platform Performance
+## Platform Performance
 
 In August of 2017 an academic article/benchmark called [Evaluating Natural Language Understanding Services for Conversational Question Answering Systems](http://workshop.colips.org/wochat/@sigdial2017/documents/SIGDIAL22.pdf)  by Daniel Braun, Adrian Hernandez-Mendez, Florian Matthes and Manfred Langen and it analysed the [F1 Score](https://en.wikipedia.org/wiki/F1_score) of some platforms to establish a baseline on how to evaluate such platforms. 
 In this article, the authors assessed the performance of API.ai (now Dialogflow, Google), Luis.ai (Microsoft), IBM Watson, and Rasa NLU. 
@@ -37,7 +37,7 @@ This seems to be because of the threshold: while other systems returns you the b
 By default this intent is set to 0.5, so if the probability score is lower than that, Default Fallback Intent is returned instead.
 However, Dialogflow has since updated their API to version 2, as well as given overall improvements to the final product (like allowing to set the *importance* of an intent, making it possible to adjust the probability score needed), making it truly competitive with Rasa, which we previously mentioned that was our other option.
 
-### Platform Choice Conclusion
+## Platform Choice Conclusion
 
 In the end, we ended up with two great options, **Dialogflow** and **Rasa NLU**, both of which have great performance and complete with all the necessary features. 
 While Dialogflow is a complete closed source product with a fully functional API and graphical web interface.
@@ -62,8 +62,13 @@ All in all, it comes to the following differences:
 * Can be operated on premise.
 
 Taking these differences into account, **Dialogflow** is the most complete, and thus, the obvious choice for assistant development.
-However, there is a full-featured bot framework called [**Articulate**](https://spg.ai/projects/articulate/) that is being developed on [GitHub](https://github.com/samtecspg/articulate) which: uses **Rasa NLU** for understanding and custom context based code for dialog, making it work closer to how **Dialogflow** does than **Rasa Core**; `HTTP API` for creating `intents`, `entities`, and interacting with `agents`; GUI similar to Dialogflow that is fully open source; and the data and interface can be hosted in the cloud or on premise. 
+However, there is a full-featured bot framework called [**Articulate**](https://spg.ai/projects/articulate/) that is being developed on [GitHub](https://github.com/samtecspg/articulate) which: 
+* Uses **Rasa NLU** for understanding and custom context based code for dialog, making it work closer to how **Dialogflow** does than **Rasa Core**; 
+* Has a `HTTP API` for creating `intents`, `entities`, and interacting with `agents`; 
+* Presents itself with a GUI similar to Dialogflow that is fully open source; 
+* Data and interface can be hosted in the cloud or on premise. 
 
 It is hard to say what to expect of the future, and impossible to predict which platform will become the best and most complete one, since Articulate, being Open-Source, might overrun Dialogflow, but Dialogflow can also go Open-Source, making the future uncertain. Nevertheless, for now, Dialogflow wins and it will be our pick.
 
-## Dialogflow Implementation
+# Dialogflow Implementation
+
