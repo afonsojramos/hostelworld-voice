@@ -54,7 +54,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     function activitiesHandler(agent) {
         const params = agent.context.get('booking-context').parameters;
         const city = params['geo-city'];
-        //agent.add('My name is Dialogflow!' + city);
         let conv = agent.conv();
         console.log(conv);
 
@@ -68,7 +67,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 }
                 conv.ask(`I highly recommend you to visit ${response[0].name}, but visiting ${response[1].name} or ${response[2].name} should also be tremendously fun!`);
                 conv.ask(new Carousel({
-                    title: 'Google Assistant',
+                    title: `${city}'s Top 4`,
                     items: {
                         'OptionOne': {
                             title: `${response[0].name}`,
