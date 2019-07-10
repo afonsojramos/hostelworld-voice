@@ -91,3 +91,11 @@ When working with **fulfillment** it is also necessary to understand concepts li
 
 I will not try to recreate documentation or articles I've used as research, so I'll just leave them here: [DialogFlow : A Complete Guide with Webhook](https://medium.com/leboncoin-engineering-blog/dialogflow-a-complete-guide-with-webhook-85b8456b4e1d), [Dialogflow web hooks: how to develop locally and deploy to Cloud Functions](https://medium.com/@antonyharfield/dialogflow-web-hooks-how-to-develop-locally-and-deploy-to-cloud-functions-48839919e998) and [Building a voice-enabled Chatbot for a website using Dialogflow, Fulfillment + Firebase cloud functions and jQuery](https://medium.com/byteridge/building-a-voice-enabled-chat-bot-for-a-website-using-dialogflow-firebase-jquery-3a10a3a36e2)
 
+## First Steps
+
+With the knowledge we've gathered above, we can now proceed to do something more meaningful and, as such, I've integrated the Google Places API for [search](https://developers.google.com/places/web-service/search) and for [photo providing](https://developers.google.com/places/web-service/photos).
+
+After understanding the main concepts we can use the `@google/maps` Node.js library available on [GitHub](https://github.com/googlemaps/google-maps-services-js) with further documentation on each methods [here](https://googlemaps.github.io/google-maps-services-js/docs/GoogleMapsClient.html).
+
+
+
