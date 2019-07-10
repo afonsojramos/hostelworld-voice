@@ -1,5 +1,7 @@
 # Hostelworld Voice Assistant Integration
 
+![hostelworld](http://www.hostelworldgroup.com/~/media/Images/H/Hostelworld-v2/image-gallery/logos/master-lock-up-light-backgrounds.png)
+
 ## Index
 
 1. [Platforms](#Platforms)
@@ -71,4 +73,21 @@ However, there is a full-featured bot framework called [**Articulate**](https://
 It is hard to say what to expect of the future, and impossible to predict which platform will become the best and most complete one, since Articulate, being Open-Source, might overrun Dialogflow, but Dialogflow can also go Open-Source, making the future uncertain. Nevertheless, for now, Dialogflow wins and it will be our pick.
 
 # Dialogflow Implementation
+
+A Dialogflow's "application" is called an `agent`, and to access its full features one must grasp a few key concepts, namely: how to define a good natural language understanding model; how to extract parameters with `entities`, which let you define how data is extracted from user utterances; how to manage states with `contexts`, which lets you maintain a conversation state across throughout a conversation; and how to integrate with the Google Assistant using `agent fullfilment`, which lets you test and deploy your Dialogflow `agent` as `actions` that users can invoke through the Assistant.
+
+First of all we need to [create an account](https://dialogflow.com/docs/getting-started/create-account) and then we can start to [create our first agent](https://dialogflow.com/docs/getting-started/first-agent)!
+
+Afterwards you may want to investigate the following:
+
+* [Agents](https://dialogflow.com/docs/agents)
+* [Intents](https://dialogflow.com/docs/intents)
+* [Entities](https://dialogflow.com/docs/entities) and [how extract them](https://dialogflow.com/docs/getting-started/extract-entities)
+* [Contexts](https://dialogflow.com/docs/agents) and [how to manage states with them](https://dialogflow.com/docs/getting-started/state-contexts)
+* [Fulfillment](https://dialogflow.com/docs/fulfillment) and [Fulfillment's inner workings](https://dialogflow.com/docs/integrations/actions/integration)
+* Furthermore you should learn [how to configure fulfillment](https://dialogflow.com/docs/fulfillment/configure) and [how to integrate them in Actions on Google](https://dialogflow.com/docs/agents)
+
+When working with **fulfillment** it is also necessary to understand concepts like [Webhooks](https://dialogflow.com/docs/reference/fulfillment-library/webhook-client). While if you want to customise the UI presented at visual assistants you should take a look at [Rich Responses in Dialogflow](https://dialogflow.com/docs/reference/fulfillment-library/rich-responses) and [Actions on Google Reponses](https://developers.google.com/actions/assistant/responses).
+
+I will not try to recreate documentation or articles I've used as research, so I'll just leave them here: [DialogFlow : A Complete Guide with Webhook](https://medium.com/leboncoin-engineering-blog/dialogflow-a-complete-guide-with-webhook-85b8456b4e1d), [Dialogflow web hooks: how to develop locally and deploy to Cloud Functions](https://medium.com/@antonyharfield/dialogflow-web-hooks-how-to-develop-locally-and-deploy-to-cloud-functions-48839919e998) and [Building a voice-enabled Chatbot for a website using Dialogflow, Fulfillment + Firebase cloud functions and jQuery](https://medium.com/byteridge/building-a-voice-enabled-chat-bot-for-a-website-using-dialogflow-firebase-jquery-3a10a3a36e2)
 
