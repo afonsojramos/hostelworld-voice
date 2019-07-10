@@ -46,33 +46,28 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         if (city != '') {
             console.log(`Getting properties for > ${city} <`);
 
-
             return rp({
                 method: 'GET',
-                uri: 'https://api.m.hostelworld.com',
-                path: `/suggestions/?text=${city}`,
+                uri: `https://api.m.hostelworld.com/2.1/suggestions/?text=${city}`,
                 headers: {
                     'accept': 'application/json',
                     'Accept-Language': 'en'
                 }
             })
                 .then(function (body) {
-                    console.log(body);
-                    return Promise.resolve(body);
+                    const response = JSON.parse(body);
+                    for (let i = 0; i < response.length; i++) {
+                        const element = response[i];
+                        console.log(element);
+                        if (element.type == "city")
+                            return Promise.resolve(element);
+                    }
+                    return Promise.resolve("Sorry, but I could not find a city with that name!");
                 })
                 .catch(function (err) {
-                    console.log(Promise.reject(err));
+                    console.log(Promise.resolve(err));
                 });
         }
-
-        return googleMapsClient.places({ query: `${city}`, type: 'museum' }).asPromise()
-            .then((response) => {
-                console.log(response.json.results);
-                return Promise.resolve(response.json.results.slice(0, 4));
-            })
-            .catch((err) => {
-                console.log(Promise.reject(err));
-            });
     };
 
     function accommodationHandler(agent) {
@@ -89,8 +84,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                     conv.ask('Sorry, try this on a screen device or select the phone surface in the simulator.');
                     return;
                 }
-                conv.ask(`I highly recommend you to visit ${response[0].name}, but visiting ${response[1].name} or ${response[2].name} should also be tremendously fun!`);
-                conv.ask(new Carousel({
+                conv.ask(`I highly recommend you to visit ${response.id}!`);
+                //conv.ask(`I highly recommend you to visit ${response[0].name}, but visiting ${response[1].name} or ${response[2].name} should also be tremendously fun!`);
+                /* conv.ask(new Carousel({
                     title: `This is my Top 4`,
                     items: {
                         'OptionOne': {
@@ -126,7 +122,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             },
                         },
                     },
-                }));
+                })); */
                 agent.add(conv);
                 return Promise.resolve(response);
             })
