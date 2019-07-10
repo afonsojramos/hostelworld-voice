@@ -3,6 +3,7 @@
 'use strict';
 
 const functions = require('firebase-functions');
+const rp = require('request-promise');
 const { WebhookClient } = require('dialogflow-fulfillment');
 const placesAPIkey = `AIzaSyA_ioaEbPgfOjBB2DWiW-P4RJcCBEpaPP8`;
 const googleMapsClient = require('@google/maps').createClient({
@@ -38,8 +39,31 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         agent.add(`I'm sorry, can you try again?`);
     }
 
-    const getNearbyMuseums = (city) => {
-        console.log("> getNearbyMuseums City: " + city);
+    const getNearbyMuseums = (params) => {
+        console.log(params);
+        const city = params['geo-city'];
+
+        if (city != '') {
+            console.log(`Getting properties for > ${city} <`);
+
+
+            return rp({
+                method: 'GET',
+                uri: 'https://api.m.hostelworld.com',
+                path: `/suggestions/?text=${city}`,
+                headers: {
+                    'accept': 'application/json',
+                    'Accept-Language': 'en'
+                }
+            })
+                .then(function (body) {
+                    console.log(body);
+                    return Promise.resolve(body);
+                })
+                .catch(function (err) {
+                    console.log(Promise.reject(err));
+                });
+        }
 
         return googleMapsClient.places({ query: `${city}`, type: 'museum' }).asPromise()
             .then((response) => {
@@ -53,14 +77,13 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     function accommodationHandler(agent) {
         const params = agent.context.get('booking-context').parameters;
-        console.log(params);
-        const city = params['geo-city'];
         let conv = agent.conv();
         console.log(conv);
 
-        return getNearbyMuseums(city)
+        return getNearbyMuseums(params)
             .then((response) => {
-                console.log(`This was my response : ${JSON.stringify(response)}`);
+                console.log("I got this response!");
+                console.log(response);
 
                 if (!conv.screen) {
                     conv.ask('Sorry, try this on a screen device or select the phone surface in the simulator.');
@@ -68,7 +91,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 }
                 conv.ask(`I highly recommend you to visit ${response[0].name}, but visiting ${response[1].name} or ${response[2].name} should also be tremendously fun!`);
                 conv.ask(new Carousel({
-                    title: `${city}'s Top 4`,
+                    title: `This is my Top 4`,
                     items: {
                         'OptionOne': {
                             title: `${response[0].name}`,
