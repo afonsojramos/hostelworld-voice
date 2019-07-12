@@ -26,9 +26,6 @@ process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     const agent = new WebhookClient({ request, response });
-    //agent.requestSource = agent.ACTIONS_ON_GOOGLE;
-    //console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
-    //console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
     function welcome(agent) {
         agent.add(`Welcome to my agent!`);
@@ -39,12 +36,23 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         agent.add(`I'm sorry, can you try again?`);
     }
 
-    const getNearbyMuseums = (params) => {
-        console.log(params);
-        const city = params['geo-city'];
+    const getHostels = (city) => {
+        console.log(`Getting properties for > ${city} <`);
 
-        if (city != '') {
-            console.log(`Getting properties for > ${city} <`);
+        return rp({
+            method: 'GET',
+            uri: `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?currency=EUR&page=1&per-page=4&property-num-images=1`,
+            headers: {
+                'accept': 'application/json',
+                'Accept-Language': 'en',
+                'User-Agent': 'mobile'
+            }
+        });
+    };
+
+    const getCityId = (city) => {
+        if (city !== '') {
+            console.log(`Getting id for > ${city} <`);
 
             return rp({
                 method: 'GET',
@@ -53,21 +61,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                     'accept': 'application/json',
                     'Accept-Language': 'en'
                 }
-            })
-                .then(function (body) {
-                    const response = JSON.parse(body);
-                    for (let i = 0; i < response.length; i++) {
-                        const element = response[i];
-                        console.log(element);
-                        if (element.type == "city")
-                            return Promise.resolve(element);
-                    }
-                    return Promise.resolve("Sorry, but I could not find a city with that name!");
-                })
-                .catch(function (err) {
-                    console.log(Promise.resolve(err));
-                });
-        }
+            });
+        } 
     };
 
     function accommodationHandler(agent) {
@@ -75,56 +70,76 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         let conv = agent.conv();
         console.log(conv);
 
-        return getNearbyMuseums(params)
-            .then((response) => {
-                console.log("I got this response!");
-                console.log(response);
+        return getCityId(params['geo-city'])
+            .then((searchResponse) => {
+                const parsedSearch = JSON.parse(searchResponse);
+
+                let city;
+                for (let i = 0; i < parsedSearch.length; i++) {
+                    if (parsedSearch[i].type == "city") {
+                        console.log(parsedSearch[i]);
+                        city = parsedSearch[i];
+                        break;
+                    }
+                }
 
                 if (!conv.screen) {
                     conv.ask('Sorry, try this on a screen device or select the phone surface in the simulator.');
                     return;
                 }
-                conv.ask(`I highly recommend you to visit ${response.id}!`);
-                //conv.ask(`I highly recommend you to visit ${response[0].name}, but visiting ${response[1].name} or ${response[2].name} should also be tremendously fun!`);
-                /* conv.ask(new Carousel({
-                    title: `This is my Top 4`,
-                    items: {
-                        'OptionOne': {
-                            title: `${response[0].name}`,
-                            description: `${response[0].rating} stars!`,
-                            image: {
-                                url: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=${response[0].photos[0].photo_reference}&key=${placesAPIkey}`,
-                                accessibilityText: `${response[0].name}`,
+
+                conv.ask(`I highly recommend you to visit ${city.name}!`);
+
+                return getHostels(city)
+                    .then((propertiesResponse) => {
+                        const parsedProperties = JSON.parse(propertiesResponse).properties;
+                        console.log(parsedProperties);
+
+                        conv.ask(new Carousel({
+                            title: `${city.name}'s Top 4`,
+                            items: {
+                                'OptionOne': {
+                                    title: `${parsedProperties[0].name}`,
+                                    description: `${parsedProperties[0].overallRating.overall / 10}/10!`,
+                                    image: {
+                                        url: `https://${parsedProperties[0].images[0].prefix + parsedProperties[0].images[0].suffix}`,
+                                        accessibilityText: `${parsedProperties[0].name}`,
+                                    },
+                                },
+                                'OptionTwo': {
+                                    title: `${parsedProperties[1].name}`,
+                                    description: `${parsedProperties[1].overallRating.overall / 10}/10!`,
+                                    image: {
+                                        url: `https://${parsedProperties[1].images[0].prefix + parsedProperties[1].images[0].suffix}`,
+                                        accessibilityText: `${parsedProperties[1].name}`
+                                    },
+                                },
+                                'OptionThree': {
+                                    title: `${parsedProperties[2].name}`,
+                                    description: `${parsedProperties[2].overallRating.overall / 10}/10!`,
+                                    image: {
+                                        url: `https://${parsedProperties[2].images[0].prefix + parsedProperties[2].images[0].suffix}`,
+                                        accessibilityText: `${parsedProperties[2].name}`
+                                    },
+                                },
+                                'OptionFour': {
+                                    title: `${parsedProperties[3].name}`,
+                                    description: `${parsedProperties[3].overallRating.overall / 10}/10!`,
+                                    image: {
+                                        url: `https://${parsedProperties[3].images[0].prefix + parsedProperties[3].images[0].suffix}`,
+                                        accessibilityText: `${parsedProperties[3].name}`
+                                    },
+                                },
                             },
-                        },
-                        'OptionTwo': {
-                            title: `${response[1].name}`,
-                            description: `${response[1].rating} stars!`,
-                            image: {
-                                url: `https://maps.googleapis.com/maps/api/place/photo?maxheight=800&photoreference=${response[1].photos[0].photo_reference}&key=${placesAPIkey}`,
-                                accessibilityText: `${response[1].name}`
-                            },
-                        },
-                        'OptionThree': {
-                            title: `${response[2].name}`,
-                            description: `${response[2].rating} stars!`,
-                            image: {
-                                url: `https://maps.googleapis.com/maps/api/place/photo?maxheight=800&photoreference=${response[2].photos[0].photo_reference}&key=${placesAPIkey}`,
-                                accessibilityText: `${response[2].name}`
-                            },
-                        },
-                        'OptionFour': {
-                            title: `${response[3].name}`,
-                            description: `${response[3].rating} stars!`,
-                            image: {
-                                url: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=${response[3].photos[0].photo_reference}&key=${placesAPIkey}`,
-                                accessibilityText: `${response[3].name}`
-                            },
-                        },
-                    },
-                })); */
-                agent.add(conv);
-                return Promise.resolve(response);
+                        }));
+
+                        agent.add(conv);
+                    })
+                    .catch((err) => {
+                        agent.add("Uh oh, something is wrong TWO *bleeds*" + err);
+                        return Promise.resolve(err);
+                    });
+
             })
             .catch((err) => {
                 agent.add("Uh oh, something is wrong *bleeds*" + err);
