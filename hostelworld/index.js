@@ -5,11 +5,6 @@
 const functions = require('firebase-functions');
 const rp = require('request-promise');
 const { WebhookClient } = require('dialogflow-fulfillment');
-const placesAPIkey = `AIzaSyA_ioaEbPgfOjBB2DWiW-P4RJcCBEpaPP8`;
-const googleMapsClient = require('@google/maps').createClient({
-    key: placesAPIkey,
-    Promise: Promise
-});
 const {
     dialogflow,
     SimpleResponse,
