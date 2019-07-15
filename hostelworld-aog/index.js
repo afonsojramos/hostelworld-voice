@@ -23,7 +23,7 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type }) => {
     console.log(params);
     console.log(date, geo_city, map_sort, hostel_type);
 
-    return getCityId(params.geo_city, conv)
+    return getCityId(geo_city)
         .then((searchResponse) => {
             const parsedSearch = JSON.parse(searchResponse);
 
@@ -112,8 +112,7 @@ const getHostels = (city) => {
     });
 };
 
-const getCityId = (city, conv) => {
-    if (city !== '') {
+const getCityId = (city) => {
         console.log(`Getting id for > ${city} <`);
 
         return rp({
@@ -124,7 +123,6 @@ const getCityId = (city, conv) => {
                 'Accept-Language': 'en'
             }
         });
-    }
 };
 
 // Set the DialogflowApp object to handle the HTTPS POST request.
