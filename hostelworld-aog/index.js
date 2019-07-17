@@ -53,43 +53,7 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
                             const parsedProperties = JSON.parse(propertiesResponse).properties;
                             console.log(parsedProperties);
 
-                            conv.ask(new Carousel({
-                                title: `${city.name}'s Top 4`,
-                                items: {
-                                    'OptionOne': {
-                                        title: `${parsedProperties[0].name}`,
-                                        description: `${parsedProperties[0].overallRating.overall / 10}/10!`,
-                                        image: {
-                                            url: `https://${parsedProperties[0].images[0].prefix + parsedProperties[0].images[0].suffix}`,
-                                            accessibilityText: `${parsedProperties[0].name}`,
-                                        },
-                                    },
-                                    'OptionTwo': {
-                                        title: `${parsedProperties[1].name}`,
-                                        description: `${parsedProperties[1].overallRating.overall / 10}/10!`,
-                                        image: {
-                                            url: `https://${parsedProperties[1].images[0].prefix + parsedProperties[1].images[0].suffix}`,
-                                            accessibilityText: `${parsedProperties[1].name}`
-                                        },
-                                    },
-                                    'OptionThree': {
-                                        title: `${parsedProperties[2].name}`,
-                                        description: `${parsedProperties[2].overallRating.overall / 10}/10!`,
-                                        image: {
-                                            url: `https://${parsedProperties[2].images[0].prefix + parsedProperties[2].images[0].suffix}`,
-                                            accessibilityText: `${parsedProperties[2].name}`
-                                        },
-                                    },
-                                    'OptionFour': {
-                                        title: `${parsedProperties[3].name}`,
-                                        description: `${parsedProperties[3].overallRating.overall / 10}/10!`,
-                                        image: {
-                                            url: `https://${parsedProperties[3].images[0].prefix + parsedProperties[3].images[0].suffix}`,
-                                            accessibilityText: `${parsedProperties[3].name}`
-                                        },
-                                    },
-                                },
-                            }));
+                            conv.ask(createPropertiesCarousel(city, parsedProperties));
                         })
                         .catch((err) => {
                             conv.ask("Uh oh, something is wrong TWO *bleeds*" + err);
@@ -149,48 +113,12 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type }, confirma
 
             conv.ask(`These are my recomendations for ${city.name}!`);
 
-            return getHostels(city)
+            return getHostels(city, map_sort, hostel_type)
                 .then((propertiesResponse) => {
                     const parsedProperties = JSON.parse(propertiesResponse).properties;
                     console.log(parsedProperties);
 
-                    conv.ask(new Carousel({
-                        title: `${city.name}'s Top 4`,
-                        items: {
-                            'OptionOne': {
-                                title: `${parsedProperties[0].name}`,
-                                description: `${parsedProperties[0].overallRating.overall / 10}/10!`,
-                                image: {
-                                    url: `https://${parsedProperties[0].images[0].prefix + parsedProperties[0].images[0].suffix}`,
-                                    accessibilityText: `${parsedProperties[0].name}`,
-                                },
-                            },
-                            'OptionTwo': {
-                                title: `${parsedProperties[1].name}`,
-                                description: `${parsedProperties[1].overallRating.overall / 10}/10!`,
-                                image: {
-                                    url: `https://${parsedProperties[1].images[0].prefix + parsedProperties[1].images[0].suffix}`,
-                                    accessibilityText: `${parsedProperties[1].name}`
-                                },
-                            },
-                            'OptionThree': {
-                                title: `${parsedProperties[2].name}`,
-                                description: `${parsedProperties[2].overallRating.overall / 10}/10!`,
-                                image: {
-                                    url: `https://${parsedProperties[2].images[0].prefix + parsedProperties[2].images[0].suffix}`,
-                                    accessibilityText: `${parsedProperties[2].name}`
-                                },
-                            },
-                            'OptionFour': {
-                                title: `${parsedProperties[3].name}`,
-                                description: `${parsedProperties[3].overallRating.overall / 10}/10!`,
-                                image: {
-                                    url: `https://${parsedProperties[3].images[0].prefix + parsedProperties[3].images[0].suffix}`,
-                                    accessibilityText: `${parsedProperties[3].name}`
-                                },
-                            },
-                        },
-                    }));
+                    conv.ask(createPropertiesCarousel(city, parsedProperties));
                 })
                 .catch((err) => {
                     conv.ask("Uh oh, something is wrong TWO *bleeds*" + err);
@@ -232,6 +160,46 @@ const getCityId = (city) => {
         });
     }
 };
+
+const createPropertiesCarousel = (city, parsedProperties) => {
+    return new Carousel({
+        title: `${city.name}'s Top 4`,
+        items: {
+            'OptionOne': {
+                title: `${parsedProperties[0].name}`,
+                description: `${parsedProperties[0].overallRating.overall / 10}/10!`,
+                image: {
+                    url: `https://${parsedProperties[0].images[0].prefix + parsedProperties[0].images[0].suffix}`,
+                    accessibilityText: `${parsedProperties[0].name}`,
+                },
+            },
+            'OptionTwo': {
+                title: `${parsedProperties[1].name}`,
+                description: `${parsedProperties[1].overallRating.overall / 10}/10!`,
+                image: {
+                    url: `https://${parsedProperties[1].images[0].prefix + parsedProperties[1].images[0].suffix}`,
+                    accessibilityText: `${parsedProperties[1].name}`
+                },
+            },
+            'OptionThree': {
+                title: `${parsedProperties[2].name}`,
+                description: `${parsedProperties[2].overallRating.overall / 10}/10!`,
+                image: {
+                    url: `https://${parsedProperties[2].images[0].prefix + parsedProperties[2].images[0].suffix}`,
+                    accessibilityText: `${parsedProperties[2].name}`
+                },
+            },
+            'OptionFour': {
+                title: `${parsedProperties[3].name}`,
+                description: `${parsedProperties[3].overallRating.overall / 10}/10!`,
+                image: {
+                    url: `https://${parsedProperties[3].images[0].prefix + parsedProperties[3].images[0].suffix}`,
+                    accessibilityText: `${parsedProperties[3].name}`
+                },
+            },
+        },
+    });
+}
 
 // Set the DialogflowApp object to handle the HTTPS POST request.
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app);
