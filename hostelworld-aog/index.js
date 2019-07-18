@@ -170,7 +170,7 @@ const createPropertiesCarousel = (city, parsedProperties, screen) => {
             items: {
                 'OptionOne': {
                     title: `${parsedProperties[0].name}`,
-                    description: `${parsedProperties[0].overallRating.overall / 10}/10!`,
+                    description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
                     image: {
                         url: `https://${parsedProperties[0].images[0].prefix + parsedProperties[0].images[0].suffix}`,
                         accessibilityText: `${parsedProperties[0].name}`,
@@ -178,7 +178,7 @@ const createPropertiesCarousel = (city, parsedProperties, screen) => {
                 },
                 'OptionTwo': {
                     title: `${parsedProperties[1].name}`,
-                    description: `${parsedProperties[1].overallRating.overall / 10}/10!`,
+                    description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
                     image: {
                         url: `https://${parsedProperties[1].images[0].prefix + parsedProperties[1].images[0].suffix}`,
                         accessibilityText: `${parsedProperties[1].name}`
@@ -186,7 +186,7 @@ const createPropertiesCarousel = (city, parsedProperties, screen) => {
                 },
                 'OptionThree': {
                     title: `${parsedProperties[2].name}`,
-                    description: `${parsedProperties[2].overallRating.overall / 10}/10!`,
+                    description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
                     image: {
                         url: `https://${parsedProperties[2].images[0].prefix + parsedProperties[2].images[0].suffix}`,
                         accessibilityText: `${parsedProperties[2].name}`
@@ -194,7 +194,7 @@ const createPropertiesCarousel = (city, parsedProperties, screen) => {
                 },
                 'OptionFour': {
                     title: `${parsedProperties[3].name}`,
-                    description: `${parsedProperties[3].overallRating.overall / 10}/10!`,
+                    description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
                     image: {
                         url: `https://${parsedProperties[3].images[0].prefix + parsedProperties[3].images[0].suffix}`,
                         accessibilityText: `${parsedProperties[3].name}`
