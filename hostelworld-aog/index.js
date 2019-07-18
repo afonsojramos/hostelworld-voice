@@ -19,7 +19,7 @@ const app = dialogflow({ debug: true });
 app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted) => {
     const { name } = conv.user;
     const { location } = conv.device;
-    const { date, geo_city, map_sort, hostel_type } = conv.contexts.input[`booking-context`].parameters;
+    const { date, geo_city, map_sort, hostel_type, duration } = conv.contexts.input[`booking-context`].parameters;
 
     console.log(location);
 
@@ -45,7 +45,7 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
 
                     conv.ask(`These are my recomendations for ${city.name}!`);
 
-                    return getHostels(city)
+                    return getHostels(city, date, map_sort, hostel_type, duration)
                         .then((propertiesResponse) => {
                             const parsedProperties = JSON.parse(propertiesResponse).properties;
                             console.log(parsedProperties);
@@ -76,7 +76,7 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
 
 });
 
-app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type }, confirmationGranted) => {
+app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }, confirmationGranted) => {
 
     if (geo_city === '' && !conv.user.permissions.includes('DEVICE_PRECISE_LOCATION') && !conv.user.permissions.includes('DEVICE_COARSE_LOCATION')) {
 
@@ -117,7 +117,7 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type }, confirma
 
             conv.ask(`These are my recomendations for ${city.name}!`);
 
-            return getHostels(city, map_sort, hostel_type)
+            return getHostels(city, date, map_sort, hostel_type, duration)
                 .then((propertiesResponse) => {
                     const parsedProperties = JSON.parse(propertiesResponse).properties;
                     console.log(parsedProperties);
@@ -138,12 +138,15 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type }, confirma
         });
 });
 
-const getHostels = (city) => {
+const getHostels = (city, date, map_sort, hostel_type, duration) => {
     console.log(`Getting properties for > ${city.name} <`);
+    var URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${(date && convertToDays(duration)) ? `date-start=${date.substring(0, 10)}&` : ''}${(date && convertToDays(duration)) ? `num-nights=${convertToDays(duration)}&` : ''}${map_sort ? `sort=${map_sort}&` : ''}currency=EUR&page=1&per-page=4&${hostel_type ? `property-type=${hostel_type}&` : ''}property-num-images=1`;
+
+    console.log(URI);
 
     return rp({
         method: 'GET',
-        uri: `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?currency=EUR&page=1&per-page=4&property-num-images=1`,
+        uri: `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${(date && duration) ? `date-start=${date.substring(0, 10)}&` : ''}${(date && duration) ? `num-nights=${convertToDays(duration)}&` : ''}${map_sort ? `sort=${map_sort}&` : ''}currency=EUR&page=1&per-page=4&${hostel_type ? `property-type=${hostel_type}&` : ''}property-num-images=1`,
         headers: {
             'accept': 'application/json',
             'Accept-Language': 'en',
