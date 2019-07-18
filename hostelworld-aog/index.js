@@ -53,13 +53,15 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
                             conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
                         })
                         .catch((err) => {
-                            conv.ask("Uh oh, something is wrong TWO *bleeds*" + err);
+                            conv.ask("Uh oh, something bad happened... Please try again later!");
+                            console.log(err);
                             return Promise.resolve(err);
                         });
 
                 })
                 .catch((err) => {
-                    conv.ask("Uh oh, something is wrong *bleeds*" + err);
+                    conv.ask("Uh oh, something bad happened... Please try again later!");
+                    console.log(err);
                     return Promise.resolve(err);
                 });
         } else {
@@ -123,13 +125,15 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type }, confirma
                     conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
                 })
                 .catch((err) => {
-                    conv.ask("Uh oh, something is wrong TWO *bleeds*" + err);
+                    conv.ask("Uh oh, something bad happened... Please try again later!");
+                    console.log(err);
                     return Promise.resolve(err);
                 });
 
         })
         .catch((err) => {
-            conv.ask("Uh oh, something is wrong *bleeds*" + err);
+            conv.ask("Uh oh, something bad happened... Please try again later!");
+            console.log(err);
             return Promise.resolve(err);
         });
 });
