@@ -148,6 +148,22 @@ const getHostels = (city) => {
     });
 };
 
+const convertToDays = (duration) => {
+    switch (duration.unit) {
+        case "day":
+            return duration.amount;
+
+        case "wk":
+            return duration.amount * 7;
+
+        case "mo":
+            return duration.amount * 30;
+
+        default:
+            return false;
+    }
+};
+
 const getCityId = (city) => {
     if (city) {
         console.log(`Getting id for > ${city} <`);
