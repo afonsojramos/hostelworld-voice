@@ -186,6 +186,21 @@ const getCityId = (city) => {
     }
 };
 
+const getCityIdByCoords = (location) => {
+    if (location.latitude && location.longitude) {
+        console.log(`Getting id for > ${location.city} <`);
+
+        return rp({
+            method: 'GET',
+            uri: `https://api.m.hostelworld.com/2.1/cities/?longitude=${longitude}&latitude=${latitude}`,
+            headers: {
+                'accept': 'application/json',
+                'Accept-Language': 'en'
+            }
+        });
+    }
+};
+
 const createPropertiesCarousel = (city, parsedProperties, screen) => {
     if (screen) {
         return new Carousel({
