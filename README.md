@@ -74,28 +74,35 @@ It is hard to say what to expect of the future, and impossible to predict which 
 
 # Dialogflow Implementation
 
-A Dialogflow's "application" is called an `agent`, and to access its full features one must grasp a few key concepts, namely: how to define a good natural language understanding model; how to extract parameters with `entities`, which let you define how data is extracted from user utterances; how to manage states with `contexts`, which lets you maintain a conversation state across throughout a conversation; and how to integrate with the Google Assistant using `agent fullfilment`, which lets you test and deploy your Dialogflow `agent` as `actions` that users can invoke through the Assistant.
+A Dialogflow's "application" is called an `agent`, and to access its full features one must grasp a few key concepts, namely: how to define a good natural language understanding model; how to extract parameters with `entities`, which let you define how data is extracted from user utterances; how to manage states with `contexts`, which lets you maintain a conversation state across throughout a conversation; and how to integrate with the Google Assistant using `agent fulfilment`, which lets you test and deploy your Dialogflow `agent` as `actions` that users can invoke through the Assistant.
 
-First of all we need to [create an account](https://dialogflow.com/docs/getting-started/create-account) and then we can start to [create our first agent](https://dialogflow.com/docs/getting-started/first-agent)!
+First of all, let's try to understand some of the concepts:
 
-Afterwards you may want to investigate the following:
+* [Agents](https://cloud.google.com/dialogflow/docs/agents-overview)
+* [Intents](https://cloud.google.com/dialogflow/docs/intents-overview)
+* [Entities](https://cloud.google.com/dialogflow/docs/entities-overview)
+* [Contexts](https://cloud.google.com/dialogflow/docs/contexts-input-output)
+* [Events](https://cloud.google.com/dialogflow/docs/events-overview)
+* [Fulfillment](https://cloud.google.com/dialogflow/docs/fulfillment-overview)
 
-* [Agents](https://dialogflow.com/docs/agents)
-* [Intents](https://dialogflow.com/docs/intents)
-* [Entities](https://dialogflow.com/docs/entities) and [how extract them](https://dialogflow.com/docs/getting-started/extract-entities)
-* [Contexts](https://dialogflow.com/docs/agents) and [how to manage states with them](https://dialogflow.com/docs/getting-started/state-contexts)
-* [Fulfillment](https://dialogflow.com/docs/fulfillment) and [Fulfillment's inner workings](https://dialogflow.com/docs/integrations/actions/integration)
-* Furthermore you should learn [how to configure fulfillment](https://dialogflow.com/docs/fulfillment/configure) and [how to integrate them in Actions on Google](https://dialogflow.com/docs/agents)
-
-When working with **fulfillment** it is also necessary to understand concepts like [Webhooks](https://dialogflow.com/docs/reference/fulfillment-library/webhook-client). While if you want to customise the UI presented at visual assistants you should take a look at [Rich Responses in Dialogflow](https://dialogflow.com/docs/reference/fulfillment-library/rich-responses) and [Actions on Google Reponses](https://developers.google.com/actions/assistant/responses).
-
-I will not try to recreate documentation or articles I've used as research, so I'll just leave them here: [DialogFlow : A Complete Guide with Webhook](https://medium.com/leboncoin-engineering-blog/dialogflow-a-complete-guide-with-webhook-85b8456b4e1d), [Dialogflow web hooks: how to develop locally and deploy to Cloud Functions](https://medium.com/@antonyharfield/dialogflow-web-hooks-how-to-develop-locally-and-deploy-to-cloud-functions-48839919e998) and [Building a voice-enabled Chatbot for a website using Dialogflow, Fulfillment + Firebase cloud functions and jQuery](https://medium.com/byteridge/building-a-voice-enabled-chat-bot-for-a-website-using-dialogflow-firebase-jquery-3a10a3a36e2)
+When working with **fulfillment** it is also necessary to understand concepts **Webhooks**. A Webhook (also called a web callback or HTTP push API) is a way for an app to provide other applications with real-time information. A webhook delivers data to other applications as it happens, meaning you get data immediately. Unlike typical APIs where you would need to poll for data very frequently in order to get it real-time. This makes webhooks much more efficient for both provider and consumer. The only drawback to webhooks is the difficulty of initially setting them up, but in this case we have the [WebhookClient](https://dialogflow.com/docs/reference/fulfillment-library/webhook-client) class that handles the communication with Dialogflow's webhook fulfillment API with support for rich responses across the 8 supported platforms. While if you want to customise the UI presented at visual assistants you should take a look at [Rich Responses in Dialogflow](https://dialogflow.com/docs/reference/fulfillment-library/rich-responses) and [Actions on Google Responses](https://developers.google.com/actions/assistant/responses).
 
 ## First Steps
 
+If you're trying to build a Dialogflow Agent yourself, before reading about my implementation I suggest that you start by reading their tutorial on [how to build an agent](https://cloud.google.com/dialogflow/docs/tutorials/build-an-agent/), [how to customise it](https://cloud.google.com/dialogflow/docs/tutorials/build-an-agent/create-customize-agent), [how to add parameters to an intent](https://cloud.google.com/dialogflow/docs/tutorials/build-an-agent/create-intent-with-parameters) and [how to implement fulfillment using webhooks](https://cloud.google.com/dialogflow/docs/tutorials/build-an-agent/create-fulfillment-using-webhook).
+
+Now you can read how my journey went! 👷
+
+## My Implementation
+
 With the knowledge we've gathered above, we can now proceed to do something more meaningful and, as such, I've integrated the Google Places API for [search](https://developers.google.com/places/web-service/search) and for [photo providing](https://developers.google.com/places/web-service/photos).
 
-After understanding the main concepts we can use the `@google/maps` Node.js library available on [GitHub](https://github.com/googlemaps/google-maps-services-js) with further documentation on each methods [here](https://googlemaps.github.io/google-maps-services-js/docs/GoogleMapsClient.html).
+After understanding the main concepts we can use the `@google/maps` Node.js library available on [GitHub](https://github.com/googlemaps/google-maps-services-js) with further documentation on each methods [here](https://googlemaps.github.io/google-maps-services-js/docs/GoogleMapsClient.html) I was quickly able to implement an Action that gathered the top 4 Museums of a given location. However, looking back, this was a good implementation of an initial agent with limited functionality, but it was flawed. All the information had to come from speech, and there wasn't a clear distinction of the use of the Dialogflow API and Actions on Google API, which would end up being troublesome when requesting for some [permissions](https://developers.google.com/actions/reference/rest/Shared.Types/Permission) with the help of [helper intents](https://developers.google.com/actions/assistant/helpers#helper_intents).
 
+My next step was starting to use the Hostelworld API and learning its intricacies, defining what I wanted from it, and understanding the possibilities of the calls I was going to use. At first, I started with an initial implementation replicating the google maps one which was done with ease, despite some minor problems, but they were quickly solved and the next challenge showed up: **permissions to access user location**, to, for example, ask "Where can I stay around here?", without defining user location.
 
+To clarify what must happen, one needs to ask for the user's location permissions first, and if the user gives the permission, their location will be made available in the request JSON. Two different kinds of location can be asked for, *DEVICE_PRECISE_LOCATION* will give you their exact latitude and longitude, only available on mobile, and *DEVICE_COARSE_LOCATION* will provide you with broader location information, which is also available on, for example, Google Home.
 
+However this is not enough, since the event *actions_intent_PERMISSION* needs to be attached to any Intent that uses the information the user authorized to be sent and handled by the defined Intent through the webhook.
+
+https://github.com/alexa/skill-sample-nodejs-fact/blob/en-US/instructions/2-lambda-function.md
