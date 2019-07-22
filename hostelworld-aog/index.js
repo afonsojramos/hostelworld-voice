@@ -24,11 +24,12 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
     console.log(location);
 
     if (confirmationGranted && name && location) {
-        conv.ask(`Hello ${name.given}! Nice to meet you! ` +
+        conv.ask(`Hello ${name.given}! ` +
             `I hope I can find something for you either in ${location.city} or anywhere else in the world!`);
 
         return getCityIdByCoords(location)
-            .then((city) => {
+            .then((cityResponse) => {
+                const city = JSON.parse(cityResponse);
                 conv.contexts.input[`booking-context`].parameters.geo_city = city.name;
                 conv.ask(`These are my recommendations for ${city.name}!`);
 
@@ -168,12 +169,16 @@ const getCityId = (city) => {
 };
 
 const getCityIdByCoords = (location) => {
-    if (location.latitude && location.longitude) {
+    if (location.coordinates && location.coordinates.latitude && location.coordinates.longitude) {
         console.log(`Getting id for > ${location.city} <`);
+
+        const URI = `https://api.m.hostelworld.com/2.1/cities/?longitude=${location.coordinates.longitude}&latitude=${location.coordinates.latitude}`;
+
+        console.log(URI);
 
         return rp({
             method: 'GET',
-            uri: `https://api.m.hostelworld.com/2.1/cities/?longitude=${longitude}&latitude=${latitude}`,
+            uri: URI,
             headers: {
                 'accept': 'application/json',
                 'Accept-Language': 'en'
