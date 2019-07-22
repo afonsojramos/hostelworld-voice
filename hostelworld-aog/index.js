@@ -146,7 +146,7 @@ const getHostels = (city, date, map_sort, hostel_type, duration) => {
 
     return rp({
         method: 'GET',
-        uri: `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${(date && duration) ? `date-start=${date.substring(0, 10)}&` : ''}${(date && duration) ? `num-nights=${convertToDays(duration)}&` : ''}${map_sort ? `sort=${map_sort}&` : ''}currency=EUR&page=1&per-page=4&${hostel_type ? `property-type=${hostel_type}&` : ''}property-num-images=1`,
+        uri: URI,
         headers: {
             'accept': 'application/json',
             'Accept-Language': 'en',
