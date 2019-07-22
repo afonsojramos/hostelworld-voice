@@ -27,58 +27,39 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
         conv.ask(`Hello ${name.given}! Nice to meet you! ` +
             `I hope I can find something for you either in ${location.city} or anywhere else in the world!`);
 
-        if (geo_city === '') {
-            conv.contexts.input[`booking-context`].parameters.geo_city = location.city;
+        return getCityIdByCoords(location)
+            .then((city) => {
+                conv.contexts.input[`booking-context`].parameters.geo_city = city.name;
+                conv.ask(`These are my recommendations for ${city.name}!`);
 
-            return getCityId(location.city)
-                .then((searchResponse) => {
-                    const parsedSearch = JSON.parse(searchResponse);
+                return getHostels(city, date, map_sort, hostel_type, duration)
+                    .then((propertiesResponse) => {
+                        const parsedProperties = JSON.parse(propertiesResponse).properties;
+                        console.log(parsedProperties);
 
-                    let city;
-                    for (let i = 0; i < parsedSearch.length; i++) {
-                        if (parsedSearch[i].type == "city") {
-                            console.log(parsedSearch[i]);
-                            city = parsedSearch[i];
-                            break;
-                        }
-                    }
+                        conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                    })
+                    .catch((err) => {
+                        conv.ask("Uh oh, something bad happened... Please try again later!");
+                        console.log(err);
+                        return Promise.resolve(err);
+                    });
 
-                    conv.ask(`These are my recomendations for ${city.name}!`);
-
-                    return getHostels(city, date, map_sort, hostel_type, duration)
-                        .then((propertiesResponse) => {
-                            const parsedProperties = JSON.parse(propertiesResponse).properties;
-                            console.log(parsedProperties);
-
-                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
-                        })
-                        .catch((err) => {
-                            conv.ask("Uh oh, something bad happened... Please try again later!");
-                            console.log(err);
-                            return Promise.resolve(err);
-                        });
-
-                })
-                .catch((err) => {
-                    conv.ask("Uh oh, something bad happened... Please try again later!");
-                    console.log(err);
-                    return Promise.resolve(err);
-                });
-        } else {
-            conv.ask(`Where are you looking to stay at?`);
-            return;
-        }
+            })
+            .catch((err) => {
+                conv.ask("Uh oh, something bad happened... Please try again later!");
+                console.log(err);
+                return Promise.resolve(err);
+            });
 
     } else {
         conv.ask(`Looks like I can't get your location`);
     }
-
-
 });
 
 app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }, confirmationGranted) => {
 
-    if (geo_city === '' && !conv.user.permissions.includes('DEVICE_PRECISE_LOCATION') && !conv.user.permissions.includes('DEVICE_COARSE_LOCATION')) {
+    if (geo_city === '') {
 
         var options;
 
@@ -97,50 +78,50 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
 
         return;
 
-    } else if (geo_city === '' && (conv.user.permissions.includes('DEVICE_PRECISE_LOCATION') || conv.user.permissions.includes('DEVICE_COARSE_LOCATION'))) {
-        const { location } = conv.device;
-        geo_city = location.city;
-    }
+    } else {
 
-    return getCityId(geo_city)
-        .then((searchResponse) => {
-            const parsedSearch = JSON.parse(searchResponse);
+        return getCityId(geo_city)
+            .then((searchResponse) => {
+                const parsedSearch = JSON.parse(searchResponse);
 
-            let city;
-            for (let i = 0; i < parsedSearch.length; i++) {
-                if (parsedSearch[i].type == "city") {
-                    console.log(parsedSearch[i]);
-                    city = parsedSearch[i];
-                    break;
+                let city;
+                for (let i = 0; i < parsedSearch.length; i++) {
+                    if (parsedSearch[i].type == "city") {
+                        console.log(parsedSearch[i]);
+                        city = parsedSearch[i];
+                        break;
+                    }
                 }
-            }
 
-            conv.ask(`These are my recomendations for ${city.name}!`);
+                console.log(city);
 
-            return getHostels(city, date, map_sort, hostel_type, duration)
-                .then((propertiesResponse) => {
-                    const parsedProperties = JSON.parse(propertiesResponse).properties;
-                    console.log(parsedProperties);
+                conv.ask(`These are my recommendations for ${city.name}!`);
 
-                    conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
-                })
-                .catch((err) => {
-                    conv.ask("Uh oh, something bad happened... Please try again later!");
-                    console.log(err);
-                    return Promise.resolve(err);
-                });
+                return getHostels(city, date, map_sort, hostel_type, duration)
+                    .then((propertiesResponse) => {
+                        const parsedProperties = JSON.parse(propertiesResponse).properties;
+                        console.log(parsedProperties);
 
-        })
-        .catch((err) => {
-            conv.ask("Uh oh, something bad happened... Please try again later!");
-            console.log(err);
-            return Promise.resolve(err);
-        });
+                        conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                    })
+                    .catch((err) => {
+                        conv.ask("Uh oh, something bad happened... Please try again later!");
+                        console.log(err);
+                        return Promise.resolve(err);
+                    });
+
+            })
+            .catch((err) => {
+                conv.ask("Uh oh, something bad happened... Please try again later!");
+                console.log(err);
+                return Promise.resolve(err);
+            });
+    }
 });
 
 const getHostels = (city, date, map_sort, hostel_type, duration) => {
     console.log(`Getting properties for > ${city.name} <`);
-    var URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${(date && convertToDays(duration)) ? `date-start=${date.substring(0, 10)}&` : ''}${(date && convertToDays(duration)) ? `num-nights=${convertToDays(duration)}&` : ''}${map_sort ? `sort=${map_sort}&` : ''}currency=EUR&page=1&per-page=4&${hostel_type ? `property-type=${hostel_type}&` : ''}property-num-images=1`;
+    const URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${(date && convertToDays(duration)) ? ('date-start=' + date.substring(0, 10) + '&') : ''}${(date && convertToDays(duration)) ? 'num-nights=' + convertToDays(duration) + '&' : ''}${map_sort ? 'sort=' + map_sort + '&' : ''}currency=EUR&page=1&per-page=4&${hostel_type ? 'property-type=' + hostel_type + '&' : ''}property-num-images=1`;
 
     console.log(URI);
 
