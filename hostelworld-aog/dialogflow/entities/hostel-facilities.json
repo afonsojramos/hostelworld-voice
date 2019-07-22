@@ -1,0 +1,9 @@
+{
+  "id": "bf76b256-13c2-4486-a4ab-59b5ad842a6e",
+  "name": "hostel-facilities",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

@@ -1,0 +1,538 @@
+[
+  {
+    "id": "8256de74-d210-4bc5-8187-40a752830eec",
+    "data": [
+      {
+        "text": "Boavista Guest House",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "1e3ae029-5ebd-4728-962b-0a68b743a142",
+    "data": [
+      {
+        "text": "Hotel Cristal Porto",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "cf958577-8966-40ae-befd-afc9ba94b1d9",
+    "data": [
+      {
+        "text": "Dear Porto Guest House",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "bfd56ae7-304b-4228-acce-b3dbe17548cd",
+    "data": [
+      {
+        "text": "Hospedaria do Bonfim",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "19a7cb38-7ad4-4d7c-9e78-097cf755d614",
+    "data": [
+      {
+        "text": "Hotel Poveira",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "7cfb7027-b94f-40a1-9c4a-eac8e9a4e6b9",
+    "data": [
+      {
+        "text": "Hotel Universal",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "389e4e40-3ad4-423d-a805-97125e4b2232",
+    "data": [
+      {
+        "text": "Pensao Franca",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "53e48c4f-c136-4ad3-86c4-14371533412c",
+    "data": [
+      {
+        "text": "Porto Riad",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "3911412b-761b-48f1-9c64-311691a4fa48",
+    "data": [
+      {
+        "text": "Salty Days Lodge",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a3ceee2a-cd77-4a22-8486-7bcf74e696d0",
+    "data": [
+      {
+        "text": "City Drops Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f28935ec-5530-4daf-b92f-91ed95b60fbd",
+    "data": [
+      {
+        "text": "Residencial Flor Braganca",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f1fc2731-1b94-490d-835b-93ec63acc340",
+    "data": [
+      {
+        "text": "Mystery Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a253be7a-3c95-4ce6-a65c-44aa536f7e74",
+    "data": [
+      {
+        "text": "The Poets Inn",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "0a7c8203-67ca-4184-a615-c9dab75843a0",
+    "data": [
+      {
+        "text": "Sport Hostel in Porto",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "88e22fb2-99c3-40a8-adc5-d6402c2306bd",
+    "data": [
+      {
+        "text": "Urban Garden Porto Central Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "fe5fddaa-e7dc-4f3e-90dc-ea4f8b43969c",
+    "data": [
+      {
+        "text": "M2Students Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a8772f27-0b2a-46ba-a504-87c24928ca5d",
+    "data": [
+      {
+        "text": "Happy Porto Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "5bfb2a4f-45b8-4317-b983-44c95b0487ca",
+    "data": [
+      {
+        "text": "CoolHostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f1aa05af-3a88-4b46-818e-d1f46c65b6bc",
+    "data": [
+      {
+        "text": "Canvas Atelier Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "b89c8685-a4e6-4b65-9420-c9c2eeac8c96",
+    "data": [
+      {
+        "text": "Residencial Cristo Rei",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "45b27324-a3f2-4cf0-a771-91dc559591c6",
+    "data": [
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Victoria Studios",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "30b8b9ef-c9aa-452b-8829-513c9a575eae",
+    "data": [
+      {
+        "text": "Magnolia Porto Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d85a3a82-5210-457d-91c0-7b1c20a11a96",
+    "data": [
+      {
+        "text": "Hostel GaiaPorto",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "3f3c23bf-2827-4ae0-9396-e5933e06e723",
+    "data": [
+      {
+        "text": "The Passenger Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "50b7e6c4-5775-48cd-af58-2bc1fe5f0ac7",
+    "data": [
+      {
+        "text": "Oporto Invictus Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "12d0c61f-a8c6-48b0-bb41-d35eb5caad4e",
+    "data": [
+      {
+        "text": "Porto Lounge Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "2b7b5800-b371-45e5-a8ed-361303b80526",
+    "data": [
+      {
+        "text": "Best Guest Porto Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "db0d7b6e-dc54-400b-b339-cc21cc34cd9d",
+    "data": [
+      {
+        "text": "Oporto City Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d0d669a2-c052-48ab-ad66-e504834e6846",
+    "data": [
+      {
+        "text": "Bluesock Hostels Porto",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "52a13b89-1b16-4fd0-8356-ce9b4963ac3d",
+    "data": [
+      {
+        "text": "Porto Republica Hostel \u0026 Suites",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "434785fa-292d-4c2d-aa6f-84e9f4e54988",
+    "data": [
+      {
+        "text": "Tattva Design Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "ebad30d7-d3d2-4974-9140-296b4dd97326",
+    "data": [
+      {
+        "text": "Garden House Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "01861f06-5b87-48e3-9328-a531d9ef751c",
+    "data": [
+      {
+        "text": "Porto Spot Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "11097d71-dc78-4452-84ec-b7fa9ae9384d",
+    "data": [
+      {
+        "text": "Yes! Porto Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "bb7c4cdd-951b-4c69-aa8b-adb44ae5ffbf",
+    "data": [
+      {
+        "text": "Gallery Hostel Porto",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "7efa01bf-2572-4f49-bc63-64782cfa687b",
+    "data": [
+      {
+        "text": "Porto Wine Hostel",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "6ea43972-10d3-4ef7-b24d-868d765641a2",
+    "data": [
+      {
+        "text": "PILOT Design Hostel \u0026 Bar",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "c06617b1-1874-4e82-a95e-1347777a5a77",
+    "data": [
+      {
+        "text": "Nice Way Porto",
+        "alias": "hostel_title",
+        "meta": "@hostel-title",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

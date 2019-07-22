@@ -1,0 +1,48 @@
+{
+  "id": "7d5c8e8a-2438-4929-a489-0bf6bda4ede7",
+  "parentId": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
+  "rootParentId": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
+  "name": "Hostels - Permission Confirmed",
+  "auto": true,
+  "contexts": [
+    "booking-context",
+    "Hostels-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "Hostels.Hostels-yes",
+      "affectedContexts": [
+        {
+          "name": "booking-context",
+          "parameters": {},
+          "lifespan": 20
+        }
+      ],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        },
+        {
+          "type": 0,
+          "lang": "pt",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "actions_intent_PERMISSION"
+    }
+  ]
+}

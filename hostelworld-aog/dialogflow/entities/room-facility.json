@@ -1,0 +1,9 @@
+{
+  "id": "2f254a30-79e9-49ce-b99a-0218a79fc2a3",
+  "name": "room-facility",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

@@ -1,0 +1,613 @@
+[
+  {
+    "id": "11c99e29-1588-4926-88c5-2b4c577f53ff",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "cheapest",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "hostel",
+        "alias": "hostel_type",
+        "meta": "@hostel-type",
+        "userDefined": false
+      },
+      {
+        "text": " to stay in ",
+        "userDefined": false
+      },
+      {
+        "text": "Porto",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "starting from the next monday",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "1 month",
+        "alias": "duration",
+        "meta": "@sys.duration",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "84c1d14b-29d5-4430-9dec-ed11af188200",
+    "data": [
+      {
+        "text": "I need an ",
+        "userDefined": false
+      },
+      {
+        "text": "hostel",
+        "alias": "hostel_type",
+        "meta": "@hostel-type",
+        "userDefined": false
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "today",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a7555680-677d-42cb-bad0-e9de6cf96330",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "cheapest",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": " option to stay in ",
+        "userDefined": false
+      },
+      {
+        "text": "Porto",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": true
+      },
+      {
+        "text": " from ",
+        "userDefined": false
+      },
+      {
+        "text": "tomorrow",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": false
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "1 week",
+        "alias": "duration",
+        "meta": "@sys.duration",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "141fad23-a991-4cbe-b50a-e1c7751ff325",
+    "data": [
+      {
+        "text": "Where can I stay ",
+        "userDefined": false
+      },
+      {
+        "text": "tomorrow",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "9 nights",
+        "alias": "duration",
+        "meta": "@sys.duration",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d1ca5d53-da3c-4cd7-aa04-46541cba832e",
+    "data": [
+      {
+        "text": "Where can I stay in ",
+        "userDefined": false
+      },
+      {
+        "text": "Porto",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "tomorrow",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "beaef7da-4dc3-40cc-a6ce-68546a9ab7ab",
+    "data": [
+      {
+        "text": "I want to find something ",
+        "userDefined": false
+      },
+      {
+        "text": "nearby",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "66bace73-0818-4b74-94b0-2d755ce0145c",
+    "data": [
+      {
+        "text": "Where can I sleep",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "b975a742-90bf-4bf8-9d1a-b1430a90b9db",
+    "data": [
+      {
+        "text": "Where can I stay",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "00514a3a-8163-4e2c-8c2c-61f113b6e84c",
+    "data": [
+      {
+        "text": "I want to sleep in a ",
+        "userDefined": false
+      },
+      {
+        "text": "hostel",
+        "alias": "hostel_type",
+        "meta": "@hostel-type",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "ee8d89b9-76f0-40d3-ae89-546d95f4f0b7",
+    "data": [
+      {
+        "text": "Where can I stay for the night?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 0
+  },
+  {
+    "id": "9a7f841d-064f-48b4-8a1b-7a23aca8f7c6",
+    "data": [
+      {
+        "text": "What are the ",
+        "userDefined": false
+      },
+      {
+        "text": "furthest away from here",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "32fc61fd-dee2-4702-85f4-20b1401c1188",
+    "data": [
+      {
+        "text": "What are the ",
+        "userDefined": false
+      },
+      {
+        "text": "cheapest",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": " options?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "38838a10-554d-49bc-b5da-27adf1cc034e",
+    "data": [
+      {
+        "text": "What are the ",
+        "userDefined": false
+      },
+      {
+        "text": "cheapest",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "hostels",
+        "alias": "hostel_type",
+        "meta": "@hostel-type",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "fcd9f484-cb1d-42c3-a5f4-3f0637dcac6f",
+    "data": [
+      {
+        "text": "Where can I stay ",
+        "userDefined": false
+      },
+      {
+        "text": "around here",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "028e4d1c-aeab-4e67-b95c-d2957ac4cc18",
+    "data": [
+      {
+        "text": "Cheapest",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "hostels",
+        "alias": "hostel_type",
+        "meta": "@hostel-type",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "Braga",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "2fea74dd-dd87-47fb-b935-0c5ee7df8686",
+    "data": [
+      {
+        "text": "What are the ",
+        "userDefined": false
+      },
+      {
+        "text": "best",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": " places in ",
+        "userDefined": false
+      },
+      {
+        "text": "New York",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d43d90b4-ce8b-4454-a066-d116b943c998",
+    "data": [
+      {
+        "text": "What can I do ",
+        "userDefined": false
+      },
+      {
+        "text": "around",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "New York",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "4dcfd38d-b3f6-45b8-88cf-51cbf5eb856b",
+    "data": [
+      {
+        "text": "What are the ",
+        "userDefined": false
+      },
+      {
+        "text": "recommended places",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": true
+      },
+      {
+        "text": " to visit ",
+        "userDefined": false
+      },
+      {
+        "text": "around",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Porto",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "263b1aed-c15c-475b-a95a-0855a55209c7",
+    "data": [
+      {
+        "text": "Where can i go ",
+        "userDefined": false
+      },
+      {
+        "text": "around",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "Porto",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "c2f1a33f-8bd3-45b2-8a54-709e50cbb31b",
+    "data": [
+      {
+        "text": "What can I do ",
+        "userDefined": false
+      },
+      {
+        "text": "tomorrow",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "around here",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8bdc025c-03f4-46af-9317-eea95a64a5f9",
+    "data": [
+      {
+        "text": "What are the ",
+        "userDefined": false
+      },
+      {
+        "text": "best",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": " places to stay in ",
+        "userDefined": false
+      },
+      {
+        "text": "Porto",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": true
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

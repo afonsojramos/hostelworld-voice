@@ -1,0 +1,122 @@
+[
+  {
+    "id": "bdb9b0f7-1dc1-458f-a35b-46c11046735c",
+    "data": [
+      {
+        "text": "book a car",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "04c76e72-07e7-4d92-a870-42d780428059",
+    "data": [
+      {
+        "text": "can I book a car for a week",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f72ed32e-5daf-44b6-bef4-c54fbadb0dc5",
+    "data": [
+      {
+        "text": "reserve a table",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "799fc469-a3ee-4208-bd07-e1efae31c70f",
+    "data": [
+      {
+        "text": "reserve a table in nearest restaurant",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "444b878c-5a9d-481c-a711-7ea60e8ca876",
+    "data": [
+      {
+        "text": "book a flight",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "c8822e6f-5cbd-4371-90c5-a5fe4349aa4e",
+    "data": [
+      {
+        "text": "book the flight to New York",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "466bac47-0eed-432a-bd08-ae3a2aba2c06",
+    "data": [
+      {
+        "text": "book the flight to London for 2 people",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "c33772d4-362c-4b30-ab08-0968d46d2bd7",
+    "data": [
+      {
+        "text": "could you please book a flight to Hawaii for the next weekend",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "9af32822-b4f8-4179-8556-97456828507b",
+    "data": [
+      {
+        "text": "I would like to book a table for tonight at 8 pm",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "9044e9f1-dd81-433a-acb3-36627e627f0a",
+    "data": [
+      {
+        "text": "I would like to book a flight",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 0
+  }
+]

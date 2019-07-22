@@ -1,0 +1,51 @@
+[
+  {
+    "value": "TV",
+    "synonyms": [
+      "TV",
+      "TV set"
+    ]
+  },
+  {
+    "value": "air condioner",
+    "synonyms": [
+      "air condioner"
+    ]
+  },
+  {
+    "value": "air conditioning",
+    "synonyms": [
+      "air conditioner",
+      "air conditioning",
+      "air control"
+    ]
+  },
+  {
+    "value": "good view",
+    "synonyms": [
+      "good view",
+      "good view from window"
+    ]
+  },
+  {
+    "value": "hair dryer",
+    "synonyms": [
+      "hair dryer"
+    ]
+  },
+  {
+    "value": "terrace",
+    "synonyms": [
+      "balcony",
+      "terrace",
+      "veranda"
+    ]
+  },
+  {
+    "value": "washing machine",
+    "synonyms": [
+      "laundry machine",
+      "washing machine"
+    ]
+  }
+]

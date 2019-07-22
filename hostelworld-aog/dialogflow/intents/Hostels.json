@@ -1,0 +1,124 @@
+{
+  "id": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
+  "name": "Hostels",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "input.activities",
+      "affectedContexts": [
+        {
+          "name": "booking-context",
+          "parameters": {},
+          "lifespan": 20
+        },
+        {
+          "name": "Hostels-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "a9b770be-e4a2-407b-bde8-781e3118fd14",
+          "required": false,
+          "dataType": "@sys.date",
+          "name": "date",
+          "value": "$date",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        },
+        {
+          "id": "19001100-4509-4f6a-8c5d-fba8cfb4546a",
+          "required": false,
+          "dataType": "@sys.geo-city",
+          "name": "geo_city",
+          "value": "$geo_city",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Let\u0027s find you something nice! In which city do you want to look?"
+            },
+            {
+              "lang": "en",
+              "value": "Okay! Which city are you visiting?"
+            },
+            {
+              "lang": "en",
+              "value": "Where in the world are we gong?"
+            },
+            {
+              "lang": "en",
+              "value": "I think I can help, where do you want to go?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "defaultValue": "#booking-context.geo-city",
+          "isList": false
+        },
+        {
+          "id": "7cdbcd0a-8ac6-4999-9232-4986cadb51cf",
+          "required": false,
+          "dataType": "@map-sort",
+          "name": "map_sort",
+          "value": "$map_sort",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        },
+        {
+          "id": "75630363-cd44-4a50-bc76-0c5358d950e7",
+          "required": false,
+          "dataType": "@hostel-type",
+          "name": "hostel_type",
+          "value": "$hostel_type",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Are you looking for an hostel, hotel, guesthouse, apartment or campsite?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        },
+        {
+          "id": "ef500bd1-179c-451f-87b6-f1ffdb78cd7b",
+          "required": false,
+          "dataType": "@sys.duration",
+          "name": "duration",
+          "value": "$duration",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": "So, there\u0027s a lot to do around $geo_city!"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "actions_intent_PERMISSION"
+    }
+  ]
+}
