@@ -25,8 +25,6 @@ app.intent('Hostels - Selection', (conv, { hostel_title }) => {
         .then((searchResponse) => {
             const parsedSearch = JSON.parse(searchResponse);
 
-            console.log(parsedSearch);
-
             let property;
             for (let i = 0; i < parsedSearch.length; i++) {
                 if (parsedSearch[i].type == "property") {
@@ -38,32 +36,37 @@ app.intent('Hostels - Selection', (conv, { hostel_title }) => {
 
             console.log(property);
 
+            if (property)
+                conv.ask(`${property.property.name} seems like a great choice! Click below to learn more!`);
+            else {
+                conv.ask(`We couldn't find you property, but we're always adding more!`);
+                return;
+            } 
+
             return getHostel(property)
-                    .then((detailedPropertyResponse) => {
-                        const detailedProperty = JSON.parse(detailedPropertyResponse);
-                        console.log(detailedProperty);
+                .then((detailedPropertyResponse) => {
+                    const detailedProperty = JSON.parse(detailedPropertyResponse);
+                    console.log(detailedProperty);
 
-                        conv.ask(`${detailedProperty.name} seems like a great choice! Click below to learn more!`);
-
-                        conv.ask(new BasicCard({
-                            text: detailedProperty.description.substring(0,256) + "...", 
-                            subtitle: `${property.city.name}, ${property.city.country}`,
-                            title: detailedProperty.name,
-                            buttons: new Button({
-                                title: 'Find out more',
-                                url: `https://www.hostelworld.com/hosteldetails.php/${property.id}`,
-                            }),
-                            image: {
-                                url: "https://" + property.property.imageGallery.prefix + property.property.imageGallery.suffix,
-                                alt: property.name,
-                            }
-                        }));
-                    })
-                    .catch((err) => {
-                        conv.ask("Uh oh, something bad happened... Please try again later!");
-                        console.log(err);
-                        return Promise.resolve(err);
-                    });
+                    conv.ask(new BasicCard({
+                        text: detailedProperty.description.substring(0, 256) + "...",
+                        subtitle: `${property.city.name}, ${property.city.country}`,
+                        title: detailedProperty.name,
+                        buttons: new Button({
+                            title: 'Find out more',
+                            url: `https://www.hostelworld.com/hosteldetails.php/${property.id}`,
+                        }),
+                        image: {
+                            url: "https://" + property.property.imageGallery.prefix + property.property.imageGallery.suffix,
+                            alt: property.name,
+                        }
+                    }));
+                })
+                .catch((err) => {
+                    conv.ask("Uh oh, something bad happened... Please try again later!");
+                    console.log(err);
+                    return Promise.resolve(err);
+                });
         })
         .catch((err) => {
             conv.ask("Uh oh, something bad happened... Please try again later!");
