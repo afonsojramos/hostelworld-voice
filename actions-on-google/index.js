@@ -2,14 +2,9 @@
 
 // Import the Dialogflow module from the Actions on Google client library.
 const { dialogflow,
-    SimpleResponse,
     BasicCard,
-    Suggestions,
     Permission,
-    UpdatePermission,
-    RegisterUpdate,
     Button,
-    List,
     Carousel } = require('actions-on-google');
 const rp = require('request-promise');
 const functions = require('firebase-functions');
@@ -18,7 +13,6 @@ const functions = require('firebase-functions');
 const app = dialogflow({ debug: true });
 
 app.intent('Hostels - Selection', (conv, { hostel_title }) => {
-
     console.log(hostel_title);
 
     return getCityId(hostel_title)
@@ -27,7 +21,7 @@ app.intent('Hostels - Selection', (conv, { hostel_title }) => {
 
             let property;
             for (let i = 0; i < parsedSearch.length; i++) {
-                if (parsedSearch[i].type == "property") {
+                if (parsedSearch[i].type === 'property') {
                     console.log(parsedSearch[i]);
                     property = parsedSearch[i];
                     break;
@@ -36,12 +30,12 @@ app.intent('Hostels - Selection', (conv, { hostel_title }) => {
 
             console.log(property);
 
-            if (property)
+            if (property) {
                 conv.ask(`${property.property.name} seems like a great choice! Click below to learn more!`);
-            else {
+            } else {
                 conv.ask(`We couldn't find you property, but we're always adding more!`);
                 return;
-            } 
+            }
 
             return getHostel(property)
                 .then((detailedPropertyResponse) => {
@@ -49,27 +43,27 @@ app.intent('Hostels - Selection', (conv, { hostel_title }) => {
                     console.log(detailedProperty);
 
                     conv.ask(new BasicCard({
-                        text: detailedProperty.description.substring(0, 256) + "...",
+                        text: detailedProperty.description.substring(0, 256) + '...',
                         subtitle: `${property.city.name}, ${property.city.country}`,
                         title: detailedProperty.name,
                         buttons: new Button({
                             title: 'Find out more',
-                            url: `https://www.hostelworld.com/hosteldetails.php/${property.id}`,
+                            url: `https://www.hostelworld.com/hosteldetails.php/${property.id}`
                         }),
                         image: {
-                            url: "https://" + property.property.imageGallery.prefix + property.property.imageGallery.suffix,
-                            alt: property.name,
+                            url: 'https://' + property.property.imageGallery.prefix + property.property.imageGallery.suffix,
+                            alt: property.name
                         }
                     }));
                 })
                 .catch((err) => {
-                    conv.ask("Uh oh, something bad happened... Please try again later!");
+                    conv.ask('Uh oh, something bad happened... Please try again later!');
                     console.log(err);
                     return Promise.resolve(err);
                 });
         })
         .catch((err) => {
-            conv.ask("Uh oh, something bad happened... Please try again later!");
+            conv.ask('Uh oh, something bad happened... Please try again later!');
             console.log(err);
             return Promise.resolve(err);
         });
@@ -78,7 +72,7 @@ app.intent('Hostels - Selection', (conv, { hostel_title }) => {
 app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted) => {
     const { name } = conv.user;
     const { location } = conv.device;
-    const { date, geo_city, map_sort, hostel_type, duration } = conv.contexts.input[`booking-context`].parameters;
+    const { date, map_sort, hostel_type, duration } = conv.contexts.input[`booking-context`].parameters;
 
     console.log(location);
 
@@ -100,53 +94,45 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
                         conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
                     })
                     .catch((err) => {
-                        conv.ask("Uh oh, something bad happened... Please try again later!");
+                        conv.ask('Uh oh, something bad happened... Please try again later!');
                         console.log(err);
                         return Promise.resolve(err);
                     });
-
             })
             .catch((err) => {
-                conv.ask("Uh oh, something bad happened... Please try again later!");
+                conv.ask('Uh oh, something bad happened... Please try again later!');
                 console.log(err);
                 return Promise.resolve(err);
             });
-
     } else {
         conv.ask(`Looks like I can't get your location`);
     }
 });
 
 app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }, confirmationGranted) => {
-
     if (geo_city === '') {
-
         var options;
 
         if (conv.screen) {
             options = {
                 context: 'To address you by name and know your location',
-                permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
+                permissions: ['NAME', 'DEVICE_PRECISE_LOCATION']
             };
         } else {
             options = {
                 context: 'To address you by name and know your location',
-                permissions: ['NAME', 'DEVICE_COARSE_LOCATION'],
+                permissions: ['NAME', 'DEVICE_COARSE_LOCATION']
             };
         }
         conv.ask(new Permission(options));
-
-        return;
-
     } else {
-
         return getCityId(geo_city)
             .then((searchResponse) => {
                 const parsedSearch = JSON.parse(searchResponse);
 
                 let city;
                 for (let i = 0; i < parsedSearch.length; i++) {
-                    if (parsedSearch[i].type == "city") {
+                    if (parsedSearch[i].type === 'city') {
                         console.log(parsedSearch[i]);
                         city = parsedSearch[i];
                         break;
@@ -165,14 +151,13 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
                         conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
                     })
                     .catch((err) => {
-                        conv.ask("Uh oh, something bad happened... Please try again later!");
+                        conv.ask('Uh oh, something bad happened... Please try again later!');
                         console.log(err);
                         return Promise.resolve(err);
                     });
-
             })
             .catch((err) => {
-                conv.ask("Uh oh, something bad happened... Please try again later!");
+                conv.ask('Uh oh, something bad happened... Please try again later!');
                 console.log(err);
                 return Promise.resolve(err);
             });
@@ -189,7 +174,7 @@ const getHostels = (city, date, map_sort, hostel_type, duration) => {
         method: 'GET',
         uri: URI,
         headers: {
-            'accept': 'application/json',
+            accept: 'application/json',
             'Accept-Language': 'en',
             'User-Agent': 'mobile'
         }
@@ -206,7 +191,7 @@ const getHostel = (property) => {
         method: 'GET',
         uri: URI,
         headers: {
-            'accept': 'application/json',
+            accept: 'application/json',
             'Accept-Language': 'en'
         }
     });
@@ -214,17 +199,17 @@ const getHostel = (property) => {
 
 const convertToDays = (duration) => {
     switch (duration.unit) {
-        case "day":
-            return duration.amount;
+    case 'day':
+        return duration.amount;
 
-        case "wk":
-            return duration.amount * 7;
+    case 'wk':
+        return duration.amount * 7;
 
-        case "mo":
-            return duration.amount * 30;
+    case 'mo':
+        return duration.amount * 30;
 
-        default:
-            return false;
+    default:
+        return false;
     }
 };
 
@@ -236,7 +221,7 @@ const getCityId = (city) => {
             method: 'GET',
             uri: `https://api.m.hostelworld.com/2.1/suggestions/?text=${city}`,
             headers: {
-                'accept': 'application/json',
+                accept: 'application/json',
                 'Accept-Language': 'en'
             }
         });
@@ -255,7 +240,7 @@ const getCityIdByCoords = (location) => {
             method: 'GET',
             uri: URI,
             headers: {
-                'accept': 'application/json',
+                accept: 'application/json',
                 'Accept-Language': 'en'
             }
         });
@@ -267,42 +252,41 @@ const createPropertiesCarousel = (city, parsedProperties, screen) => {
         return new Carousel({
             title: `${city.name}'s Top 4`,
             items: {
-                'OptionOne': {
+                OptionOne: {
                     title: `${parsedProperties[0].name}`,
                     description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
                     image: {
                         url: `https://${parsedProperties[0].images[0].prefix + parsedProperties[0].images[0].suffix}`,
-                        accessibilityText: `${parsedProperties[0].name}`,
-                    },
+                        accessibilityText: `${parsedProperties[0].name}`
+                    }
                 },
-                'OptionTwo': {
+                OptionTwo: {
                     title: `${parsedProperties[1].name}`,
                     description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
                     image: {
                         url: `https://${parsedProperties[1].images[0].prefix + parsedProperties[1].images[0].suffix}`,
                         accessibilityText: `${parsedProperties[1].name}`
-                    },
+                    }
                 },
-                'OptionThree': {
+                OptionThree: {
                     title: `${parsedProperties[2].name}`,
                     description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
                     image: {
                         url: `https://${parsedProperties[2].images[0].prefix + parsedProperties[2].images[0].suffix}`,
                         accessibilityText: `${parsedProperties[2].name}`
-                    },
+                    }
                 },
-                'OptionFour': {
+                OptionFour: {
                     title: `${parsedProperties[3].name}`,
                     description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
                     image: {
                         url: `https://${parsedProperties[3].images[0].prefix + parsedProperties[3].images[0].suffix}`,
                         accessibilityText: `${parsedProperties[3].name}`
-                    },
-                },
-            },
+                    }
+                }
+            }
         });
-    }
-    else {
+    } else {
         return `${city.name}'s Top 4 hostels are comprised of ${parsedProperties[0].name}, ${parsedProperties[1].name}, ${parsedProperties[2].name} and ${parsedProperties[3].name}. Which one are you interested in?`;
     }
 };
