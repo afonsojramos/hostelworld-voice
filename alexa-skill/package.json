@@ -1,0 +1,18 @@
+{
+    "name": "hostelworld",
+    "description": "Hostelworld assistant.",
+    "version": "0.1.5",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Afonso Ramos",
+    "license": "ISC",
+    "dependencies": {
+        "ask-sdk-core": "^2.0.7",
+        "ask-sdk-model": "^1.4.1",
+        "aws-sdk": "^2.326.0",
+        "request": "^2.88.0",
+        "request-promise": "^4.2.4"
+    }
+}
