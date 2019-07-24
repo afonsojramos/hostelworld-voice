@@ -1,9 +1,0 @@
-{
-  "id": "384f9481-5f9c-4eb4-81fc-380f659ee3ce",
-  "name": "hostel-title",
-  "isOverridable": true,
-  "isEnum": false,
-  "isRegexp": false,
-  "automatedExpansion": true,
-  "allowFuzzyExtraction": false
-}
