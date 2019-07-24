@@ -26,11 +26,6 @@
             "Greetings! How can I assist?",
             "Hello fellow traveler! 😄 What do you need help with?"
           ]
-        },
-        {
-          "type": 0,
-          "lang": "pt",
-          "speech": "Olá!"
         }
       ],
       "defaultResponsePlatforms": {},

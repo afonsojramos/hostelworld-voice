@@ -27,16 +27,6 @@
             "I didn\u0027t get that. Can you repeat?",
             "I missed that, say that again?"
           ]
-        },
-        {
-          "type": 0,
-          "lang": "pt",
-          "speech": [
-            "Vai-me desculpar, mas não percebi a pergunta.",
-            "Peço desculpa, mas não percebi muito bem a sua pergunta.",
-            "Infelizmente, essa foi uma pergunta que não percebi bem.",
-            "Desculpe, mas não entendi a sua questão."
-          ]
         }
       ],
       "defaultResponsePlatforms": {},

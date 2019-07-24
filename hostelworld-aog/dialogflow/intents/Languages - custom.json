@@ -30,11 +30,6 @@
           "type": 0,
           "lang": "en",
           "speech": "I can\u0027t believe you\u0027ve known #languages-followup.language for $duration.original!"
-        },
-        {
-          "type": 0,
-          "lang": "pt",
-          "speech": []
         }
       ],
       "defaultResponsePlatforms": {},

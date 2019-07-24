@@ -50,9 +50,7 @@
   "isPrivate": true,
   "customClassifierMode": "use.after",
   "mlMinConfidence": 0.3,
-  "supportedLanguages": [
-    "pt"
-  ],
+  "supportedLanguages": [],
   "onePlatformApiVersion": "v2",
   "analyzeQueryTextSentiment": false,
   "enabledKnowledgeBaseNames": [],
