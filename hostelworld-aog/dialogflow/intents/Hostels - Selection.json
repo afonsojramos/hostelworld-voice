@@ -1,13 +1,8 @@
 {
   "id": "7821a57b-9b8c-47bc-8b71-0bebce31dba7",
-  "parentId": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
-  "rootParentId": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
   "name": "Hostels - Selection",
-  "auto": true,
-  "contexts": [
-    "booking-context",
-    "Hostels-followup"
-  ],
+  "auto": false,
+  "contexts": [],
   "responses": [
     {
       "resetContexts": false,
@@ -30,11 +25,6 @@
         {
           "type": 0,
           "lang": "en",
-          "speech": "$hostel_title"
-        },
-        {
-          "type": 0,
-          "lang": "pt",
           "speech": []
         }
       ],
@@ -42,13 +32,9 @@
       "speech": []
     }
   ],
-  "priority": 500000,
-  "webhookUsed": false,
+  "priority": 750000,
+  "webhookUsed": true,
   "webhookForSlotFilling": false,
   "fallbackIntent": false,
-  "events": [
-    {
-      "name": "actions_intent_PERMISSION"
-    }
-  ]
+  "events": []
 }

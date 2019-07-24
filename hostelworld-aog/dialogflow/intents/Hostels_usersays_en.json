@@ -1,6 +1,64 @@
 [
   {
-    "id": "11c99e29-1588-4926-88c5-2b4c577f53ff",
+    "id": "9887856f-ffd0-4422-bb03-7a040ef5d27b",
+    "data": [
+      {
+        "text": "What is the ",
+        "userDefined": false
+      },
+      {
+        "text": "cheapest",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "hostel",
+        "alias": "hostel_type",
+        "meta": "@hostel-type",
+        "userDefined": false
+      },
+      {
+        "text": " to stay ",
+        "userDefined": false
+      },
+      {
+        "text": "Porto",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": true
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "a week",
+        "alias": "duration",
+        "meta": "@sys.duration",
+        "userDefined": false
+      },
+      {
+        "text": " starting ",
+        "userDefined": false
+      },
+      {
+        "text": "next monday",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "0a3337a5-5df7-4bd1-aa55-559c4e631351",
     "data": [
       {
         "text": "What is the ",
@@ -58,7 +116,7 @@
     "updated": 0
   },
   {
-    "id": "84c1d14b-29d5-4430-9dec-ed11af188200",
+    "id": "2f1f2c62-2c89-46b7-bc62-48873bd43257",
     "data": [
       {
         "text": "I need an ",
@@ -86,7 +144,7 @@
     "updated": 0
   },
   {
-    "id": "a7555680-677d-42cb-bad0-e9de6cf96330",
+    "id": "9a0c4a49-c5aa-4451-ba95-0727a54006e5",
     "data": [
       {
         "text": "What is the ",
@@ -138,7 +196,7 @@
     "updated": 0
   },
   {
-    "id": "141fad23-a991-4cbe-b50a-e1c7751ff325",
+    "id": "f6eefc02-9a4f-4892-b25e-a2141cdfb723",
     "data": [
       {
         "text": "Where can I stay ",
@@ -170,7 +228,7 @@
     "updated": 0
   },
   {
-    "id": "d1ca5d53-da3c-4cd7-aa04-46541cba832e",
+    "id": "4039dd33-48a0-4388-bd79-465f0c94d387",
     "data": [
       {
         "text": "Where can I stay in ",
@@ -202,7 +260,7 @@
     "updated": 0
   },
   {
-    "id": "beaef7da-4dc3-40cc-a6ce-68546a9ab7ab",
+    "id": "04dfe889-8000-4415-bb08-17bc863a6cab",
     "data": [
       {
         "text": "I want to find something ",
@@ -220,7 +278,7 @@
     "updated": 0
   },
   {
-    "id": "66bace73-0818-4b74-94b0-2d755ce0145c",
+    "id": "7f525de2-708a-4bbe-bbf3-5b9cd0cb87b2",
     "data": [
       {
         "text": "Where can I sleep",
@@ -232,7 +290,7 @@
     "updated": 0
   },
   {
-    "id": "b975a742-90bf-4bf8-9d1a-b1430a90b9db",
+    "id": "2dd9f460-184c-4a56-90fa-1b97039a4920",
     "data": [
       {
         "text": "Where can I stay",
@@ -244,7 +302,7 @@
     "updated": 0
   },
   {
-    "id": "00514a3a-8163-4e2c-8c2c-61f113b6e84c",
+    "id": "cfb74866-0655-44c0-b701-2f16459a32f3",
     "data": [
       {
         "text": "I want to sleep in a ",
@@ -262,7 +320,7 @@
     "updated": 0
   },
   {
-    "id": "ee8d89b9-76f0-40d3-ae89-546d95f4f0b7",
+    "id": "bc111a17-7fa8-4343-bce2-c61bd37e3f9e",
     "data": [
       {
         "text": "Where can I stay for the night?",
@@ -274,7 +332,7 @@
     "updated": 0
   },
   {
-    "id": "9a7f841d-064f-48b4-8a1b-7a23aca8f7c6",
+    "id": "21a1abf8-39b3-42b1-9582-74babed3e3ff",
     "data": [
       {
         "text": "What are the ",
@@ -296,7 +354,7 @@
     "updated": 0
   },
   {
-    "id": "32fc61fd-dee2-4702-85f4-20b1401c1188",
+    "id": "9b2d7633-f691-4061-889b-8aae51bac252",
     "data": [
       {
         "text": "What are the ",
@@ -318,7 +376,7 @@
     "updated": 0
   },
   {
-    "id": "38838a10-554d-49bc-b5da-27adf1cc034e",
+    "id": "6c90d7b4-bdda-4ac7-aabc-5a9043f6eb73",
     "data": [
       {
         "text": "What are the ",
@@ -350,7 +408,7 @@
     "updated": 0
   },
   {
-    "id": "fcd9f484-cb1d-42c3-a5f4-3f0637dcac6f",
+    "id": "f9113c1a-4af9-4cbc-ba9f-bde1b940c40e",
     "data": [
       {
         "text": "Where can I stay ",
@@ -372,7 +430,7 @@
     "updated": 0
   },
   {
-    "id": "028e4d1c-aeab-4e67-b95c-d2957ac4cc18",
+    "id": "d52d32fe-49b4-456c-b0f2-46f06b929c68",
     "data": [
       {
         "text": "Cheapest",
@@ -410,7 +468,7 @@
     "updated": 0
   },
   {
-    "id": "2fea74dd-dd87-47fb-b935-0c5ee7df8686",
+    "id": "77593da1-b37a-4cc1-abc8-807261639c6d",
     "data": [
       {
         "text": "What are the ",
@@ -442,7 +500,7 @@
     "updated": 0
   },
   {
-    "id": "d43d90b4-ce8b-4454-a066-d116b943c998",
+    "id": "3d98733d-e8a2-4639-9bf4-d4d5c964eb0e",
     "data": [
       {
         "text": "What can I do ",
@@ -474,7 +532,7 @@
     "updated": 0
   },
   {
-    "id": "4dcfd38d-b3f6-45b8-88cf-51cbf5eb856b",
+    "id": "784a0e58-56eb-46e5-9c1b-9954cc331bc1",
     "data": [
       {
         "text": "What are the ",
@@ -515,7 +573,7 @@
     "updated": 0
   },
   {
-    "id": "263b1aed-c15c-475b-a95a-0855a55209c7",
+    "id": "0edce127-c0ac-4044-87ea-52f32381697a",
     "data": [
       {
         "text": "Where can i go ",
@@ -547,7 +605,7 @@
     "updated": 0
   },
   {
-    "id": "c2f1a33f-8bd3-45b2-8a54-709e50cbb31b",
+    "id": "128eab1d-265c-428c-bab3-9002fe583872",
     "data": [
       {
         "text": "What can I do ",
@@ -579,7 +637,7 @@
     "updated": 0
   },
   {
-    "id": "8bdc025c-03f4-46af-9317-eea95a64a5f9",
+    "id": "5e5c4dd6-fbac-42e3-b8db-62afb98c96d7",
     "data": [
       {
         "text": "What are the ",
