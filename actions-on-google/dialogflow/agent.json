@@ -17,6 +17,10 @@
       {
         "intentId": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
         "signInRequired": false
+      },
+      {
+        "intentId": "7821a57b-9b8c-47bc-8b71-0bebce31dba7",
+        "signInRequired": false
       }
     ],
     "systemIntents": [],

@@ -2,12 +2,21 @@
   "id": "7821a57b-9b8c-47bc-8b71-0bebce31dba7",
   "name": "Hostels - Selection",
   "auto": false,
-  "contexts": [],
+  "contexts": [
+    "booking-context",
+    "Hostels-followup"
+  ],
   "responses": [
     {
       "resetContexts": false,
       "action": "Hostels",
-      "affectedContexts": [],
+      "affectedContexts": [
+        {
+          "name": "booking-context",
+          "parameters": {},
+          "lifespan": 20
+        }
+      ],
       "parameters": [
         {
           "id": "d11dce69-739a-48df-bcec-afdff304940a",

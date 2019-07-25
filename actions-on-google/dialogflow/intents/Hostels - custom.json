@@ -1,0 +1,37 @@
+{
+  "id": "b9a86e41-6fe7-46a5-92a3-0f6582e06c73",
+  "parentId": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
+  "rootParentId": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
+  "name": "Hostels - custom",
+  "auto": true,
+  "contexts": [
+    "booking-context",
+    "Hostels-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "Hostels.Hostels-custom",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "actions_intent_OPTION"
+    }
+  ]
+}

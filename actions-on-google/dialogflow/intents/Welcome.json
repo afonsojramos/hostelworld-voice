@@ -17,6 +17,23 @@
       "parameters": [],
       "messages": [
         {
+          "type": "suggestion_chips",
+          "platform": "google",
+          "lang": "en",
+          "suggestions": [
+            {
+              "title": "Where can I stay?"
+            }
+          ]
+        },
+        {
+          "type": "link_out_chip",
+          "platform": "google",
+          "lang": "en",
+          "destinationName": "Hostelworld.com",
+          "url": "https://www.hostelworld.com/"
+        },
+        {
           "type": 0,
           "lang": "en",
           "speech": [
@@ -24,11 +41,13 @@
             "Hello! How can I help you?",
             "Good day! What can I do for you today?",
             "Greetings! How can I assist?",
-            "Hello fellow traveler! 😄 What do you need help with?"
+            "Hello fellow traveler! What do you need help with?"
           ]
         }
       ],
-      "defaultResponsePlatforms": {},
+      "defaultResponsePlatforms": {
+        "google": true
+      },
       "speech": []
     }
   ],
