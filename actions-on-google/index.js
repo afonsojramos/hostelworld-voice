@@ -69,6 +69,12 @@ app.intent('Hostels - Selection', (conv, { hostel_title }) => {
         });
 });
 
+app.intent('Hostels - custom', (conv, params, option) => {
+    console.log(`Option -> ${option}`);
+
+    conv.ask(option);
+});
+
 app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted) => {
     const { name } = conv.user;
     const { location } = conv.device;
@@ -91,7 +97,11 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
                         const parsedProperties = JSON.parse(propertiesResponse).properties;
                         console.log(parsedProperties);
 
-                        conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                        const carousel = createPropertiesCarousel(city, parsedProperties, conv.screen);
+
+                        console.log(carousel.inputValueData.carouselSelect.items);
+
+                        conv.ask(carousel);
                     })
                     .catch((err) => {
                         conv.ask('Uh oh, something bad happened... Please try again later!');
@@ -230,7 +240,7 @@ const getCityId = (city) => {
 
 const getCityIdByCoords = (location) => {
     if (location.coordinates && location.coordinates.latitude && location.coordinates.longitude) {
-        console.log(`Getting id for > ${location.city} <`);
+        console.log(`Getting id by coords for > ${location.city} <`);
 
         const URI = `https://api.m.hostelworld.com/2.1/cities/?longitude=${location.coordinates.longitude}&latitude=${location.coordinates.latitude}`;
 
@@ -249,42 +259,31 @@ const getCityIdByCoords = (location) => {
 
 const createPropertiesCarousel = (city, parsedProperties, screen) => {
     if (screen) {
+        const items = {};
+
+        for (let index = 0; index < parsedProperties.length; index++) {
+            const propertyId = `Option${parsedProperties[index].id}`;
+
+            console.log(propertyId);
+
+            items[index] = {
+                optionInfo: {
+                    key: propertyId
+                },
+                title: `${parsedProperties[index].name}`,
+                description: `${parsedProperties[index].overallRating ? parsedProperties[index].overallRating.overall / 10 : '??'}/10!`,
+                image: {
+                    url: `https://${parsedProperties[index].images[0].prefix + parsedProperties[index].images[0].suffix}`,
+                    accessibilityText: `${parsedProperties[index].name}`
+                }
+            };
+
+            console.log(items[index]);
+        }
+
         return new Carousel({
             title: `${city.name}'s Top 4`,
-            items: {
-                OptionOne: {
-                    title: `${parsedProperties[0].name}`,
-                    description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
-                    image: {
-                        url: `https://${parsedProperties[0].images[0].prefix + parsedProperties[0].images[0].suffix}`,
-                        accessibilityText: `${parsedProperties[0].name}`
-                    }
-                },
-                OptionTwo: {
-                    title: `${parsedProperties[1].name}`,
-                    description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
-                    image: {
-                        url: `https://${parsedProperties[1].images[0].prefix + parsedProperties[1].images[0].suffix}`,
-                        accessibilityText: `${parsedProperties[1].name}`
-                    }
-                },
-                OptionThree: {
-                    title: `${parsedProperties[2].name}`,
-                    description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
-                    image: {
-                        url: `https://${parsedProperties[2].images[0].prefix + parsedProperties[2].images[0].suffix}`,
-                        accessibilityText: `${parsedProperties[2].name}`
-                    }
-                },
-                OptionFour: {
-                    title: `${parsedProperties[3].name}`,
-                    description: `${parsedProperties[0].overallRating ? parsedProperties[0].overallRating.overall / 10 : '??'}/10!`,
-                    image: {
-                        url: `https://${parsedProperties[3].images[0].prefix + parsedProperties[3].images[0].suffix}`,
-                        accessibilityText: `${parsedProperties[3].name}`
-                    }
-                }
-            }
+            items: items
         });
     } else {
         return `${city.name}'s Top 4 hostels are comprised of ${parsedProperties[0].name}, ${parsedProperties[1].name}, ${parsedProperties[2].name} and ${parsedProperties[3].name}. Which one are you interested in?`;
