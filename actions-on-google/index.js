@@ -15,7 +15,7 @@ const app = dialogflow({ debug: true });
 app.intent('Hostels - Selection', (conv, { hostel_title }) => {
     console.log(hostel_title);
 
-    return getCityId(hostel_title)
+    return getIDfromText(hostel_title)
         .then((searchResponse) => {
             const parsedSearch = JSON.parse(searchResponse);
 
@@ -37,7 +37,7 @@ app.intent('Hostels - Selection', (conv, { hostel_title }) => {
                 return;
             }
 
-            return getHostel(property)
+            return getHostel(property.id)
                 .then((detailedPropertyResponse) => {
                     const detailedProperty = JSON.parse(detailedPropertyResponse);
                     console.log(detailedProperty);
@@ -95,13 +95,8 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
                 return getHostels(city, date, map_sort, hostel_type, duration)
                     .then((propertiesResponse) => {
                         const parsedProperties = JSON.parse(propertiesResponse).properties;
-                        console.log(parsedProperties);
 
-                        const carousel = createPropertiesCarousel(city, parsedProperties, conv.screen);
-
-                        console.log(carousel.inputValueData.carouselSelect.items);
-
-                        conv.ask(carousel);
+                        conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
                     })
                     .catch((err) => {
                         conv.ask('Uh oh, something bad happened... Please try again later!');
@@ -136,7 +131,7 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
         }
         conv.ask(new Permission(options));
     } else {
-        return getCityId(geo_city)
+        return getIDfromText(geo_city)
             .then((searchResponse) => {
                 const parsedSearch = JSON.parse(searchResponse);
 
@@ -176,7 +171,12 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
 
 const getHostels = (city, date, map_sort, hostel_type, duration) => {
     console.log(`Getting properties for > ${city.name} <`);
-    const URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${(date && convertToDays(duration)) ? ('date-start=' + date.substring(0, 10) + '&') : ''}${(date && convertToDays(duration)) ? 'num-nights=' + convertToDays(duration) + '&' : ''}${map_sort ? 'sort=' + map_sort + '&' : ''}currency=EUR&page=1&per-page=4&${hostel_type ? 'property-type=' + hostel_type + '&' : ''}property-num-images=1`;
+    const dateStart = getCurrDate(date, 'date-start');
+    const numNights = duration ? 'num-nights=' + convertToDays(duration) + '&' : 'num-nights=2&';
+    const mapSort = map_sort ? 'sort=' + map_sort + '&' : '';
+    const hostelType = hostel_type ? 'property-type=' + hostel_type + '&' : '';
+
+    const URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${dateStart + numNights + mapSort}currency=EUR&page=1&per-page=4&${hostelType}property-num-images=1`;
 
     console.log(URI);
 
@@ -192,8 +192,7 @@ const getHostels = (city, date, map_sort, hostel_type, duration) => {
 };
 
 const getHostel = (property) => {
-    console.log(`Getting properties for > ${property.name} <`);
-    const URI = `https://api.m.hostelworld.com/2.1/properties/${property.id}`;
+    const URI = `https://api.m.hostelworld.com/2.1/properties/${property}`;
 
     console.log(URI);
 
@@ -223,7 +222,7 @@ const convertToDays = (duration) => {
     }
 };
 
-const getCityId = (city) => {
+const getIDfromText = (city) => {
     if (city) {
         console.log(`Getting id for > ${city} <`);
 
@@ -259,12 +258,10 @@ const getCityIdByCoords = (location) => {
 
 const createPropertiesCarousel = (city, parsedProperties, screen) => {
     if (screen) {
-        const items = {};
+        const items = [];
 
         for (let index = 0; index < parsedProperties.length; index++) {
-            const propertyId = `Option${parsedProperties[index].id}`;
-
-            console.log(propertyId);
+            const propertyId = `${parsedProperties[index].id}`;
 
             items[index] = {
                 optionInfo: {
@@ -277,12 +274,9 @@ const createPropertiesCarousel = (city, parsedProperties, screen) => {
                     accessibilityText: `${parsedProperties[index].name}`
                 }
             };
-
-            console.log(items[index]);
         }
 
         return new Carousel({
-            title: `${city.name}'s Top 4`,
             items: items
         });
     } else {
