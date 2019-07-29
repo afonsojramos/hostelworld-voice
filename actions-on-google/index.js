@@ -69,10 +69,36 @@ app.intent('Hostels - Selection', (conv, { hostel_title }) => {
         });
 });
 
-app.intent('Hostels - custom', (conv, params, option) => {
-    console.log(`Option -> ${option}`);
+app.intent('Hostels - Hostel Selection', (conv, params, option) => {
+    const { date, duration } = conv.contexts.input[`booking-context`].parameters;
+    return getHostel(option)
+        .then((detailedPropertyResponse) => {
+            const detailedProperty = JSON.parse(detailedPropertyResponse);
 
-    conv.ask(option);
+            const dateFrom = getCurrDate(date, 'dateFrom');
+            const dateTo = addDays(date, duration, 'dateTo');
+            const URI = `https://www.hostelworld.com/hosteldetails.php/${detailedProperty.id}?${dateFrom + dateTo}&number_of_guests=2`;
+            console.log(URI);
+
+            conv.ask(`${detailedProperty.name} seems like a great choice! Click below to learn more!`, new BasicCard({
+                text: detailedProperty.description.substring(0, 256) + '...',
+                subtitle: `${detailedProperty.city.name}, ${detailedProperty.city.country}`,
+                title: detailedProperty.name,
+                buttons: new Button({
+                    title: 'Find out more',
+                    url: URI
+                }),
+                image: {
+                    url: 'https://' + detailedProperty.images[0].prefix + detailedProperty.images[0].suffix,
+                    alt: detailedProperty.name
+                }
+            }));
+        })
+        .catch((err) => {
+            conv.ask('Uh oh, something bad happened... Please try again later!');
+            console.log(err);
+            return Promise.resolve(err);
+        });
 });
 
 app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted) => {
@@ -254,6 +280,28 @@ const getCityIdByCoords = (location) => {
             }
         });
     }
+};
+
+const getCurrDate = (date, query) => {
+    if (!date) {
+        const today = new Date();
+        const dateString = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        return query + '=' + dateString + '&';
+    } else {
+        return query + '=' + date.substring(0, 10) + '&';
+    }
+};
+
+const addDays = (date, duration, query) => {
+    var nextDate;
+    if (date) {
+        nextDate = new Date(date);
+    } else {
+        nextDate = new Date();
+    }
+    nextDate.setDate(nextDate.getDate() + (duration ? convertToDays(duration) : 2));
+    const dateString = nextDate.getFullYear() + '-' + ('0' + (nextDate.getMonth() + 1)).slice(-2) + '-' + ('0' + nextDate.getDate()).slice(-2);
+    return query + '=' + dateString + '&';
 };
 
 const createPropertiesCarousel = (city, parsedProperties, screen) => {
