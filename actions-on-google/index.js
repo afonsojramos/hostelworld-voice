@@ -12,63 +12,6 @@ const functions = require('firebase-functions');
 // Instantiate the Dialogflow client.
 const app = dialogflow({ debug: true });
 
-app.intent('Hostels - Selection', (conv, { hostel_title }) => {
-    console.log(hostel_title);
-
-    return getIDfromText(hostel_title)
-        .then((searchResponse) => {
-            const parsedSearch = JSON.parse(searchResponse);
-
-            let property;
-            for (let i = 0; i < parsedSearch.length; i++) {
-                if (parsedSearch[i].type === 'property') {
-                    console.log(parsedSearch[i]);
-                    property = parsedSearch[i];
-                    break;
-                }
-            }
-
-            console.log(property);
-
-            if (property) {
-                conv.ask(`${property.property.name} seems like a great choice! Click below to learn more!`);
-            } else {
-                conv.ask(`We couldn't find you property, but we're always adding more!`);
-                return;
-            }
-
-            return getHostel(property.id)
-                .then((detailedPropertyResponse) => {
-                    const detailedProperty = JSON.parse(detailedPropertyResponse);
-                    console.log(detailedProperty);
-
-                    conv.ask(new BasicCard({
-                        text: detailedProperty.description.substring(0, 256) + '...',
-                        subtitle: `${property.city.name}, ${property.city.country}`,
-                        title: detailedProperty.name,
-                        buttons: new Button({
-                            title: 'Find out more',
-                            url: `https://www.hostelworld.com/hosteldetails.php/${property.id}`
-                        }),
-                        image: {
-                            url: 'https://' + property.property.imageGallery.prefix + property.property.imageGallery.suffix,
-                            alt: property.name
-                        }
-                    }));
-                })
-                .catch((err) => {
-                    conv.ask('Uh oh, something bad happened... Please try again later!');
-                    console.log(err);
-                    return Promise.resolve(err);
-                });
-        })
-        .catch((err) => {
-            conv.ask('Uh oh, something bad happened... Please try again later!');
-            console.log(err);
-            return Promise.resolve(err);
-        });
-});
-
 app.intent('Hostels - Hostel Selection', (conv, params, option) => {
     const { date, duration } = conv.contexts.input[`booking-context`].parameters;
     return getHostel(option)
@@ -77,7 +20,7 @@ app.intent('Hostels - Hostel Selection', (conv, params, option) => {
 
             const dateFrom = getCurrDate(date, 'dateFrom');
             const dateTo = addDays(date, duration, 'dateTo');
-            const URI = `https://www.hostelworld.com/hosteldetails.php/${detailedProperty.id}?${dateFrom + dateTo}&number_of_guests=2`;
+            const URI = `https://www.hostelworld.com/hosteldetails.php/${detailedProperty.id}?${dateFrom + dateTo}number_of_guests=2`;
             console.log(URI);
 
             conv.ask(`${detailedProperty.name} seems like a great choice! Click below to learn more!`, new BasicCard({
@@ -219,8 +162,6 @@ const getHostels = (city, date, map_sort, hostel_type, duration) => {
 
 const getHostel = (property) => {
     const URI = `https://api.m.hostelworld.com/2.1/properties/${property}`;
-
-    console.log(URI);
 
     return rp({
         method: 'GET',
