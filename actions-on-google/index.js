@@ -59,14 +59,18 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
             .then((cityResponse) => {
                 const city = JSON.parse(cityResponse);
                 conv.contexts.input[`booking-context`].parameters.geo_city = city.name;
-                conv.ask(`These are my recommendations for ${city.name}!`);
 
                 return getHostels(city, date, map_sort, hostel_type, duration)
                     .then((propertiesResponse) => {
                         const parsedProperties = JSON.parse(propertiesResponse).properties;
                         console.log(parsedProperties);
 
-                        conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                        if (parsedProperties.length > 0) {
+                            conv.ask(`These are my recommendations for ${city.name}!`);
+                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                        } else {
+                            conv.ask(`I'm sorry but I couldn't find anything near ${city.name}`);
+                        }
                     })
                     .catch((err) => {
                         conv.ask('Uh oh, something bad happened... Please try again later!');
@@ -116,14 +120,17 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
 
                 console.log(city);
 
-                conv.ask(`These are my recommendations for ${city.name}!`);
-
                 return getHostels(city, date, map_sort, hostel_type, duration)
                     .then((propertiesResponse) => {
                         const parsedProperties = JSON.parse(propertiesResponse).properties;
-                        console.log(parsedProperties);
+                        console.log(parsedProperties.length);
 
-                        conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                        if (parsedProperties.length > 0) {
+                            conv.ask(`These are my recommendations for ${city.name}!`);
+                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                        } else {
+                            conv.ask(`I'm sorry but I couldn't find anything near ${city.name}`);
+                        }
                     })
                     .catch((err) => {
                         conv.ask('Uh oh, something bad happened... Please try again later!');
@@ -247,9 +254,6 @@ const addDays = (date, duration, query) => {
 };
 
 const createPropertiesCarousel = (city, parsedProperties, screen) => {
-    if (parsedProperties.length === 0) {
-        return `I'm sorry but I couldn't find anything near ${city.name}`;
-    }
     if (screen) {
         const items = [];
 
@@ -269,14 +273,14 @@ const createPropertiesCarousel = (city, parsedProperties, screen) => {
             };
         }
 
-        return `These are my recommendations for ${city.name}!`, new Carousel({
+        return new Carousel({
             items: items
         });
     } else {
         var verbalOutput = `${city.name}'s Top ${parsedProperties.length} properties are comprised of `;
 
         for (let index = 0; index < parsedProperties.length; index++) {
-            if (index === parsedProperties.length - 1){
+            if (index === parsedProperties.length - 1) {
                 verbalOutput += `and ${parsedProperties[index].name}. Which one are you interested in?`;
             } else {
                 verbalOutput += ` ${parsedProperties[index].name},`;
