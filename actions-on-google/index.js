@@ -8,6 +8,37 @@ const functions = require('firebase-functions');
 // Instantiate the Dialogflow client.
 const app = dialogflow({ debug: true });
 
+app.intent('Dreaming Phase', (conv, { date, geo_city, duration, map_sort, room_type, hostel_type }) => {
+    return getIDfromText(geo_city)
+        .then(searchResponse => {
+            const parsedSearch = JSON.parse(searchResponse);
+
+            const city = parsedSearch.find(element => element.type === 'city');
+
+            console.log(city);
+
+            conv.ask(`I think you will enjoy my picks for ${city.name}!`);
+
+            return getHostels(city, date, map_sort, hostel_type, duration, room_type)
+                .then(propertiesResponse => {
+                    const parsedProperties = JSON.parse(propertiesResponse).properties;
+                    console.log(parsedProperties);
+
+                    conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                })
+                .catch(err => {
+                    conv.ask('Uh oh, something bad happened... Please try again later!');
+                    console.log(err);
+                    return Promise.resolve(err);
+                });
+        })
+        .catch(err => {
+            conv.ask('Uh oh, something bad happened... Please try again later!');
+            console.log(err);
+            return Promise.resolve(err);
+        });
+});
+
 app.intent('Hostels - Hostel Selection', (conv, params, option) => {
     const { date, duration } = conv.contexts.input[`booking-context`].parameters;
     return getHostel(option)
@@ -143,8 +174,9 @@ const getHostels = (city, date, map_sort, hostel_type, duration, room_type) => {
     const numNights = duration ? `num-nights=${convertToDays(duration)}&` : 'num-nights=2&';
     const mapSort = map_sort ? 'sort=' + map_sort + '&' : '';
     const hostelType = hostel_type ? 'property-type=' + hostel_type + '&' : '';
+    const roomType = room_type ? '&room-type=dorm' + room_type : '';
 
-    const URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${dateStart + numNights + mapSort}currency=EUR&page=1&per-page=4&${hostelType}property-num-images=1`;
+    const URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${dateStart + numNights + mapSort}currency=EUR&page=1&per-page=4&${hostelType}property-num-images=1${roomType}`;
 
     console.log(URI);
 
