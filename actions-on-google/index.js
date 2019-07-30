@@ -64,6 +64,7 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
                 return getHostels(city, date, map_sort, hostel_type, duration)
                     .then((propertiesResponse) => {
                         const parsedProperties = JSON.parse(propertiesResponse).properties;
+                        console.log(parsedProperties);
 
                         conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
                     })
@@ -138,7 +139,7 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
     }
 });
 
-const getHostels = (city, date, map_sort, hostel_type, duration) => {
+const getHostels = (city, date, map_sort, hostel_type, duration, room_type) => {
     console.log(`Getting properties for > ${city.name} <`);
     const dateStart = getCurrDate(date, 'date-start');
     const numNights = duration ? 'num-nights=' + convertToDays(duration) + '&' : 'num-nights=2&';
@@ -175,17 +176,17 @@ const getHostel = (property) => {
 
 const convertToDays = (duration) => {
     switch (duration.unit) {
-    case 'day':
-        return duration.amount;
+        case 'day':
+            return duration.amount;
 
-    case 'wk':
-        return duration.amount * 7;
+        case 'wk':
+            return duration.amount * 7;
 
-    case 'mo':
-        return duration.amount * 30;
+        case 'mo':
+            return duration.amount * 30;
 
-    default:
-        return false;
+        default:
+            return false;
     }
 };
 
@@ -206,7 +207,7 @@ const getIDfromText = (city) => {
 
 const getCityIdByCoords = (location) => {
     if (location.coordinates && location.coordinates.latitude && location.coordinates.longitude) {
-        console.log(`Getting id by coords for > ${location.city} <`);
+        console.log(`Getting id by coords for > ${location.formattedAddress} <`);
 
         const URI = `https://api.m.hostelworld.com/2.1/cities/?longitude=${location.coordinates.longitude}&latitude=${location.coordinates.latitude}`;
 
@@ -246,6 +247,9 @@ const addDays = (date, duration, query) => {
 };
 
 const createPropertiesCarousel = (city, parsedProperties, screen) => {
+    if (parsedProperties.length === 0) {
+        return `I'm sorry but I couldn't find anything near ${city.name}`;
+    }
     if (screen) {
         const items = [];
 
@@ -265,11 +269,20 @@ const createPropertiesCarousel = (city, parsedProperties, screen) => {
             };
         }
 
-        return new Carousel({
+        return `These are my recommendations for ${city.name}!`, new Carousel({
             items: items
         });
     } else {
-        return `${city.name}'s Top 4 hostels are comprised of ${parsedProperties[0].name}, ${parsedProperties[1].name}, ${parsedProperties[2].name} and ${parsedProperties[3].name}. Which one are you interested in?`;
+        var verbalOutput = `${city.name}'s Top ${parsedProperties.length} properties are comprised of `;
+
+        for (let index = 0; index < parsedProperties.length; index++) {
+            if (index === parsedProperties.length - 1){
+                verbalOutput += `and ${parsedProperties[index].name}. Which one are you interested in?`;
+            } else {
+                verbalOutput += ` ${parsedProperties[index].name},`;
+            }
+        }
+        return verbalOutput;
     }
 };
 
