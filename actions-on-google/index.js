@@ -1,11 +1,7 @@
 'use strict';
 
 // Import the Dialogflow module from the Actions on Google client library.
-const { dialogflow,
-    BasicCard,
-    Permission,
-    Button,
-    Carousel } = require('actions-on-google');
+const { dialogflow, BasicCard, Permission, Button, Carousel } = require('actions-on-google');
 const rp = require('request-promise');
 const functions = require('firebase-functions');
 
@@ -15,7 +11,7 @@ const app = dialogflow({ debug: true });
 app.intent('Hostels - Hostel Selection', (conv, params, option) => {
     const { date, duration } = conv.contexts.input[`booking-context`].parameters;
     return getHostel(option)
-        .then((detailedPropertyResponse) => {
+        .then(detailedPropertyResponse => {
             const detailedProperty = JSON.parse(detailedPropertyResponse);
 
             const dateFrom = getCurrDate(date, 'dateFrom');
@@ -23,21 +19,24 @@ app.intent('Hostels - Hostel Selection', (conv, params, option) => {
             const URI = `https://www.hostelworld.com/hosteldetails.php/${detailedProperty.id}?${dateFrom + dateTo}number_of_guests=2`;
             console.log(URI);
 
-            conv.ask(`${detailedProperty.name} seems like a great choice! Click below to learn more!`, new BasicCard({
-                text: detailedProperty.description.substring(0, 256) + '...',
-                subtitle: `${detailedProperty.city.name}, ${detailedProperty.city.country}`,
-                title: detailedProperty.name,
-                buttons: new Button({
-                    title: 'Find out more',
-                    url: URI
-                }),
-                image: {
-                    url: 'https://' + detailedProperty.images[0].prefix + detailedProperty.images[0].suffix,
-                    alt: detailedProperty.name
-                }
-            }));
+            conv.ask(
+                `${detailedProperty.name} seems like a great choice! Click below to learn more!`,
+                new BasicCard({
+                    text: detailedProperty.description.substring(0, 256) + '...',
+                    subtitle: `${detailedProperty.city.name}, ${detailedProperty.city.country}`,
+                    title: detailedProperty.name,
+                    buttons: new Button({
+                        title: 'Find out more',
+                        url: URI
+                    }),
+                    image: {
+                        url: 'https://' + detailedProperty.images[0].prefix + detailedProperty.images[0].suffix,
+                        alt: detailedProperty.name
+                    }
+                })
+            );
         })
-        .catch((err) => {
+        .catch(err => {
             conv.ask('Uh oh, something bad happened... Please try again later!');
             console.log(err);
             return Promise.resolve(err);
@@ -52,16 +51,15 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
     console.log(location);
 
     if (confirmationGranted && name && location) {
-        conv.ask(`Hello ${name.given}! ` +
-            `I hope I can find something for you either in ${location.city} or anywhere else in the world!`);
+        conv.ask(`Hello ${name.given}! ` + `I hope I can find something for you either in ${location.city} or anywhere else in the world!`);
 
         return getCityIdByCoords(location)
-            .then((cityResponse) => {
+            .then(cityResponse => {
                 const city = JSON.parse(cityResponse);
                 conv.contexts.input[`booking-context`].parameters.geo_city = city.name;
 
                 return getHostels(city, date, map_sort, hostel_type, duration)
-                    .then((propertiesResponse) => {
+                    .then(propertiesResponse => {
                         const parsedProperties = JSON.parse(propertiesResponse).properties;
                         console.log(parsedProperties);
 
@@ -72,13 +70,13 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
                             conv.ask(`I'm sorry but I couldn't find anything near ${city.name}`);
                         }
                     })
-                    .catch((err) => {
+                    .catch(err => {
                         conv.ask('Uh oh, something bad happened... Please try again later!');
                         console.log(err);
                         return Promise.resolve(err);
                     });
             })
-            .catch((err) => {
+            .catch(err => {
                 conv.ask('Uh oh, something bad happened... Please try again later!');
                 console.log(err);
                 return Promise.resolve(err);
@@ -106,24 +104,17 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
         conv.ask(new Permission(options));
     } else {
         return getIDfromText(geo_city)
-            .then((searchResponse) => {
+            .then(searchResponse => {
                 const parsedSearch = JSON.parse(searchResponse);
 
-                let city;
-                for (let i = 0; i < parsedSearch.length; i++) {
-                    if (parsedSearch[i].type === 'city') {
-                        console.log(parsedSearch[i]);
-                        city = parsedSearch[i];
-                        break;
-                    }
-                }
+                const city = parsedSearch.find(element => element.type === 'city');
 
                 console.log(city);
 
                 return getHostels(city, date, map_sort, hostel_type, duration)
-                    .then((propertiesResponse) => {
+                    .then(propertiesResponse => {
                         const parsedProperties = JSON.parse(propertiesResponse).properties;
-                        console.log(parsedProperties.length);
+                        console.log(parsedProperties);
 
                         if (parsedProperties.length > 0) {
                             conv.ask(`These are my recommendations for ${city.name}!`);
@@ -132,13 +123,13 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
                             conv.ask(`I'm sorry but I couldn't find anything near ${city.name}`);
                         }
                     })
-                    .catch((err) => {
+                    .catch(err => {
                         conv.ask('Uh oh, something bad happened... Please try again later!');
                         console.log(err);
                         return Promise.resolve(err);
                     });
             })
-            .catch((err) => {
+            .catch(err => {
                 conv.ask('Uh oh, something bad happened... Please try again later!');
                 console.log(err);
                 return Promise.resolve(err);
@@ -149,7 +140,7 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
 const getHostels = (city, date, map_sort, hostel_type, duration, room_type) => {
     console.log(`Getting properties for > ${city.name} <`);
     const dateStart = getCurrDate(date, 'date-start');
-    const numNights = duration ? 'num-nights=' + convertToDays(duration) + '&' : 'num-nights=2&';
+    const numNights = duration ? `num-nights=${convertToDays(duration)}&` : 'num-nights=2&';
     const mapSort = map_sort ? 'sort=' + map_sort + '&' : '';
     const hostelType = hostel_type ? 'property-type=' + hostel_type + '&' : '';
 
@@ -168,7 +159,7 @@ const getHostels = (city, date, map_sort, hostel_type, duration, room_type) => {
     });
 };
 
-const getHostel = (property) => {
+const getHostel = property => {
     const URI = `https://api.m.hostelworld.com/2.1/properties/${property}`;
 
     return rp({
@@ -181,7 +172,7 @@ const getHostel = (property) => {
     });
 };
 
-const convertToDays = (duration) => {
+const convertToDays = duration => {
     switch (duration.unit) {
         case 'day':
             return duration.amount;
@@ -197,7 +188,7 @@ const convertToDays = (duration) => {
     }
 };
 
-const getIDfromText = (city) => {
+const getIDfromText = city => {
     if (city) {
         console.log(`Getting id for > ${city} <`);
 
@@ -212,7 +203,7 @@ const getIDfromText = (city) => {
     }
 };
 
-const getCityIdByCoords = (location) => {
+const getCityIdByCoords = location => {
     if (location.coordinates && location.coordinates.latitude && location.coordinates.longitude) {
         console.log(`Getting id by coords for > ${location.formattedAddress} <`);
 
@@ -234,10 +225,10 @@ const getCityIdByCoords = (location) => {
 const getCurrDate = (date, query) => {
     if (!date) {
         const today = new Date();
-        const dateString = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-        return query + '=' + dateString + '&';
+        const dateString = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`;
+        return `${query}=${dateString}&`;
     } else {
-        return query + '=' + date.substring(0, 10) + '&';
+        return `${query}=${date.substring(0, 10)}&`;
     }
 };
 
@@ -249,8 +240,8 @@ const addDays = (date, duration, query) => {
         nextDate = new Date();
     }
     nextDate.setDate(nextDate.getDate() + (duration ? convertToDays(duration) : 2));
-    const dateString = nextDate.getFullYear() + '-' + ('0' + (nextDate.getMonth() + 1)).slice(-2) + '-' + ('0' + nextDate.getDate()).slice(-2);
-    return query + '=' + dateString + '&';
+    const dateString = `${nextDate.getFullYear()}-${('0' + (nextDate.getMonth() + 1)).slice(-2)}-${('0' + nextDate.getDate()).slice(-2)}`;
+    return `${query}=${dateString}&`;
 };
 
 const createPropertiesCarousel = (city, parsedProperties, screen) => {
