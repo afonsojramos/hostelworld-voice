@@ -247,22 +247,21 @@ const addDays = (date, duration, query) => {
 const createPropertiesCarousel = (city, parsedProperties, screen) => {
     if (screen) {
         const items = [];
-
-        for (let index = 0; index < parsedProperties.length; index++) {
-            const propertyId = `${parsedProperties[index].id}`;
-
-            items[index] = {
+        parsedProperties.map(prop => {
+            const result = {
                 optionInfo: {
-                    key: propertyId
+                    key: `${prop.id}`
                 },
-                title: `${parsedProperties[index].name}`,
-                description: `${parsedProperties[index].overallRating ? parsedProperties[index].overallRating.overall / 10 : '??'}/10!`,
+                title: `${prop.name}`,
+                description: `${prop.overallRating ? prop.overallRating.overall / 10 : '??'}/10!`,
                 image: {
-                    url: `https://${parsedProperties[index].images[0].prefix + parsedProperties[index].images[0].suffix}`,
-                    accessibilityText: `${parsedProperties[index].name}`
+                    url: `https://${prop.images[0].prefix + prop.images[0].suffix}`,
+                    accessibilityText: `${prop.name}`
                 }
             };
-        }
+
+            items.push(result);
+        });
 
         return new Carousel({
             items: items
@@ -270,13 +269,14 @@ const createPropertiesCarousel = (city, parsedProperties, screen) => {
     } else {
         var verbalOutput = `${city.name}'s Top ${parsedProperties.length} properties are comprised of `;
 
-        for (let index = 0; index < parsedProperties.length; index++) {
+        parsedProperties.map((prop, index) => {
             if (index === parsedProperties.length - 1) {
-                verbalOutput += `and ${parsedProperties[index].name}. Which one are you interested in?`;
+                verbalOutput += `and ${prop.name}. Which one are you interested in?`;
             } else {
-                verbalOutput += ` ${parsedProperties[index].name},`;
+                verbalOutput += ` ${prop.name},`;
             }
-        }
+        });
+
         return verbalOutput;
     }
 };
