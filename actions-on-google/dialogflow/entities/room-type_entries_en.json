@@ -1,0 +1,22 @@
+[
+  {
+    "value": "dorm",
+    "synonyms": [
+      "bunk beds",
+      "chamber",
+      "dorm",
+      "dormitory",
+      "hall"
+    ]
+  },
+  {
+    "value": "private",
+    "synonyms": [
+      "closed room",
+      "personal",
+      "private",
+      "privy",
+      "room"
+    ]
+  }
+]

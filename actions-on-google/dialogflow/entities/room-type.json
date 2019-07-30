@@ -1,6 +1,6 @@
 {
-  "id": "87b8882e-3d9b-4047-af6e-e3f3e1b27eee",
-  "name": "rating",
+  "id": "e81ce32d-8bcb-48a4-9ced-70349b585866",
+  "name": "room-type",
   "isOverridable": true,
   "isEnum": false,
   "isRegexp": false,

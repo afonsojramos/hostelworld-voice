@@ -1,0 +1,27 @@
+{
+  "id": "6c9cf91f-9d4c-46dc-b93c-91e01acd5e83",
+  "name": "Help",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": "A lot of things! You can ask me \"Where are the cheapest hostels I can stay in Porto for a week starting tomorrow?\" or we can just carefully plan your next trip!"
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -11,6 +11,26 @@
       "parameters": [],
       "messages": [
         {
+          "type": "suggestion_chips",
+          "platform": "google",
+          "lang": "en",
+          "suggestions": [
+            {
+              "title": "Where can I stay?"
+            },
+            {
+              "title": "Let\u0027s plan my trip!"
+            }
+          ]
+        },
+        {
+          "type": "link_out_chip",
+          "platform": "google",
+          "lang": "en",
+          "destinationName": "Hostelworld.com",
+          "url": "https://www.hostelworld.com/"
+        },
+        {
           "type": 0,
           "lang": "en",
           "speech": [
@@ -25,11 +45,16 @@
             "What was that?",
             "Say that one more time?",
             "I didn\u0027t get that. Can you repeat?",
-            "I missed that, say that again?"
+            "I missed that, say that again?",
+            "I\u0027m sorry, I\u0027m not sure what to do...",
+            "I think I need more training to understand that, sorry!",
+            "If I had a test and that was a question, I would fail..."
           ]
         }
       ],
-      "defaultResponsePlatforms": {},
+      "defaultResponsePlatforms": {
+        "google": true
+      },
       "speech": []
     }
   ],

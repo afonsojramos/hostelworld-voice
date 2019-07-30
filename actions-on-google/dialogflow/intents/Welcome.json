@@ -23,6 +23,9 @@
           "suggestions": [
             {
               "title": "Where can I stay?"
+            },
+            {
+              "title": "Let\u0027s plan my trip!"
             }
           ]
         },
@@ -37,11 +40,11 @@
           "type": 0,
           "lang": "en",
           "speech": [
-            "Hi! How are you doing?",
-            "Hello! How can I help you?",
-            "Good day! What can I do for you today?",
-            "Greetings! How can I assist?",
-            "Hello fellow traveler! What do you need help with?"
+            "Welcome to Hostelworld! You can ask me for places to stay, or I can help you to plan your trip!",
+            "Welcome to Hostelworld! You can ask me where to stay, or I can help you to plan your trip!",
+            "Welcome to Hostelworld! You can ask me where to stay, or I can help you with a future trip!",
+            "Welcome to Hostelworld! You can ask me for places to stay, or I can help you with a future trip!",
+            "Welcome to Hostelworld! You can ask me for places to stay, or I can help you to plan your dream trip!"
           ]
         }
       ],
@@ -58,9 +61,6 @@
   "events": [
     {
       "name": "WELCOME"
-    },
-    {
-      "name": "actions_intent_PERMISSION"
     }
   ]
 }

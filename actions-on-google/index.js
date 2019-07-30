@@ -81,13 +81,45 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
 
     console.log(location);
 
-    if (confirmationGranted && name && location) {
+    if (confirmationGranted && name && location && location.coordinates) {
         conv.ask(`Hello ${name.given}! ` + `I hope I can find something for you either in ${location.city} or anywhere else in the world!`);
 
         return getCityIdByCoords(location)
             .then(cityResponse => {
                 const city = JSON.parse(cityResponse);
                 conv.contexts.input[`booking-context`].parameters.geo_city = city.name;
+
+                return getHostels(city, date, map_sort, hostel_type, duration)
+                    .then(propertiesResponse => {
+                        const parsedProperties = JSON.parse(propertiesResponse).properties;
+                        console.log(parsedProperties);
+
+                        if (parsedProperties.length > 0) {
+                            conv.ask(`These are my recommendations for ${city.name}!`);
+                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                        } else {
+                            conv.ask(`I'm sorry but I couldn't find anything near ${city.name}`);
+                        }
+                    })
+                    .catch(err => {
+                        conv.ask('Uh oh, something bad happened... Please try again later!');
+                        console.log(err);
+                        return Promise.resolve(err);
+                    });
+            })
+            .catch(err => {
+                conv.ask('Uh oh, something bad happened... Please try again later!');
+                console.log(err);
+                return Promise.resolve(err);
+            });
+    } else if (location.city) {
+        return getIDfromText(location.city)
+            .then(searchResponse => {
+                const parsedSearch = JSON.parse(searchResponse);
+
+                const city = parsedSearch.find(element => element.type === 'city');
+
+                console.log(city);
 
                 return getHostels(city, date, map_sort, hostel_type, duration)
                     .then(propertiesResponse => {
@@ -236,7 +268,7 @@ const getIDfromText = city => {
 };
 
 const getCityIdByCoords = location => {
-    if (location.coordinates && location.coordinates.latitude && location.coordinates.longitude) {
+    if (location.coordinates.latitude && location.coordinates.longitude) {
         console.log(`Getting id by coords for > ${location.formattedAddress} <`);
 
         const URI = `https://api.m.hostelworld.com/2.1/cities/?longitude=${location.coordinates.longitude}&latitude=${location.coordinates.latitude}`;
@@ -257,7 +289,7 @@ const getCityIdByCoords = location => {
 const getCurrDate = (date, query) => {
     if (!date) {
         const today = new Date();
-        const dateString = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`;
+        const dateString = `${today.getUTCFullYear()}-${('0' + (today.getUTCMonth() + 1)).slice(-2)}-${('0' + today.getUTCDate()).slice(-2)}`;
         return `${query}=${dateString}&`;
     } else {
         return `${query}=${date.substring(0, 10)}&`;
@@ -271,8 +303,8 @@ const addDays = (date, duration, query) => {
     } else {
         nextDate = new Date();
     }
-    nextDate.setDate(nextDate.getDate() + (duration ? convertToDays(duration) : 2));
-    const dateString = `${nextDate.getFullYear()}-${('0' + (nextDate.getMonth() + 1)).slice(-2)}-${('0' + nextDate.getDate()).slice(-2)}`;
+    nextDate.setUTCDate(nextDate.getUTCDate() + (duration ? convertToDays(duration) : 2));
+    const dateString = `${nextDate.getUTCFullYear()}-${('0' + (nextDate.getUTCMonth() + 1)).slice(-2)}-${('0' + nextDate.getUTCDate()).slice(-2)}`;
     return `${query}=${dateString}&`;
 };
 

@@ -1,17 +1,22 @@
 {
-  "id": "7355efd5-0b3e-404a-a6aa-7d4ad9205ee8",
-  "name": "Activities",
+  "id": "b9a86e41-6fe7-46a5-92a3-0f6582e06c73",
+  "parentId": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
+  "rootParentId": "bea6a4e9-0e04-4071-bf02-5c496339f54d",
+  "name": "Hostels - Hostel Selection",
   "auto": true,
-  "contexts": [],
+  "contexts": [
+    "booking-context",
+    "Hostels-followup"
+  ],
   "responses": [
     {
       "resetContexts": false,
-      "action": "input.activities",
+      "action": "Hostels.Hostels-custom",
       "affectedContexts": [
         {
-          "name": "travel-context",
+          "name": "booking-context",
           "parameters": {},
-          "lifespan": 20
+          "lifespan": 5
         }
       ],
       "parameters": [],
@@ -19,7 +24,7 @@
         {
           "type": 0,
           "lang": "en",
-          "speech": "So, there\u0027s a lot to do around $geo_city!"
+          "speech": []
         }
       ],
       "defaultResponsePlatforms": {},
@@ -32,7 +37,7 @@
   "fallbackIntent": false,
   "events": [
     {
-      "name": "actions_intent_PERMISSION"
+      "name": "actions_intent_OPTION"
     }
   ]
 }

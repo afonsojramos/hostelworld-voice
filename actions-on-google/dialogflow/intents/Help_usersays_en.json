@@ -1,0 +1,98 @@
+[
+  {
+    "id": "1e544a4d-63fd-4972-aa07-0b9e832550af",
+    "data": [
+      {
+        "text": "What can you do",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "43b1fa70-7f3c-47ec-bc9d-b61ad9dbbe45",
+    "data": [
+      {
+        "text": "Can you even do something",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "fc132d04-8330-45f6-a87c-f431439097af",
+    "data": [
+      {
+        "text": "Could you help me please?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "58cab1ab-acad-499a-b723-8dc9f4e0d5bf",
+    "data": [
+      {
+        "text": "What are your features",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8bb48b4e-6481-447d-b1bb-a58a22f473d6",
+    "data": [
+      {
+        "text": "What can I do",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8153c562-57e7-44cd-8e90-f5b26a784a22",
+    "data": [
+      {
+        "text": "Can you help me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "21ecd505-a6d0-4e27-82f7-699f38a0df7c",
+    "data": [
+      {
+        "text": "Help me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8a3be897-d37b-446e-8392-66a5986b605d",
+    "data": [
+      {
+        "text": "Help",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "updated": 0
+  }
+]

@@ -1,0 +1,140 @@
+{
+  "id": "91308f8a-4035-42aa-96dd-32728eabf9f7",
+  "name": "Dreaming Phase",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "dreaming-context",
+          "parameters": {},
+          "lifespan": 20
+        }
+      ],
+      "parameters": [
+        {
+          "id": "b529b33f-489c-446d-ad44-660baf433c77",
+          "required": true,
+          "dataType": "@sys.date",
+          "name": "date",
+          "value": "$date",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "When are you planing to go?"
+            },
+            {
+              "lang": "en",
+              "value": "When is this trip happening?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        },
+        {
+          "id": "8d77a3cc-b295-4888-95ef-d0c3781af164",
+          "required": true,
+          "dataType": "@sys.geo-city",
+          "name": "geo_city",
+          "value": "$geo_city",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "And where do you want to go exactly?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        },
+        {
+          "id": "31d31ff7-f3a2-4d36-97a5-1852c3abc27a",
+          "required": true,
+          "dataType": "@sys.duration",
+          "name": "duration",
+          "value": "$duration",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "How long will you stay there?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        },
+        {
+          "id": "c587a5dc-bd1c-42ba-b3ad-374f4643cc11",
+          "required": true,
+          "dataType": "@map-sort",
+          "name": "map_sort",
+          "value": "$map_sort",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Do you prefer the best hostels, the cheapest or the most fun?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        },
+        {
+          "id": "97a642e1-1949-4c8f-8409-03d6933727ce",
+          "required": true,
+          "dataType": "@room-type",
+          "name": "room_type",
+          "value": "$room_type",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Do you want to stay in a dorm or in a private?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        },
+        {
+          "id": "0946a127-d068-4d8a-902b-eb42485312f4",
+          "required": true,
+          "dataType": "@hostel-type",
+          "name": "hostel_type",
+          "value": "$hostel_type",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Are you planning on staying on a hostel, hotel, guesthouse, apartment or campsite?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": []
+}

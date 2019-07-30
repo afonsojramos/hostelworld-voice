@@ -1,0 +1,292 @@
+[
+  {
+    "id": "509c1504-121f-4a36-b8fe-23a28702fefc",
+    "data": [
+      {
+        "text": "Let\u0027s travel ",
+        "userDefined": false
+      },
+      {
+        "text": "next month",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d564e882-8f67-426c-bff6-a9643b138b55",
+    "data": [
+      {
+        "text": "Let\u0027s travel ",
+        "userDefined": false
+      },
+      {
+        "text": "in two months",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "913aa9e3-ee50-4fbc-92ef-4fd1e8e9a33d",
+    "data": [
+      {
+        "text": "Let\u0027s make a plan",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "b0672a47-1d8e-4f6b-8a28-dd08735d48ba",
+    "data": [
+      {
+        "text": "I want to go to ",
+        "userDefined": false
+      },
+      {
+        "text": "New York",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "next week",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "2 days",
+        "alias": "duration",
+        "meta": "@sys.duration",
+        "userDefined": true
+      },
+      {
+        "text": " in a ",
+        "userDefined": false
+      },
+      {
+        "text": "dorm",
+        "alias": "room_type",
+        "meta": "@room-type",
+        "userDefined": false
+      },
+      {
+        "text": " in a ",
+        "userDefined": false
+      },
+      {
+        "text": "hostel",
+        "alias": "hostel_type",
+        "meta": "@hostel-type",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "ec628b70-43d4-4697-96fe-b4ea03b73e23",
+    "data": [
+      {
+        "text": "Let\u0027s plan my trip!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "1ca911ff-15e9-4ff3-a285-a99036696247",
+    "data": [
+      {
+        "text": "Lets travel",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "069cdf25-1b44-4a3c-a2b5-653ab7d7ced5",
+    "data": [
+      {
+        "text": "I want to go somewhere ",
+        "userDefined": false
+      },
+      {
+        "text": "fun",
+        "alias": "map_sort",
+        "meta": "@map-sort",
+        "userDefined": true
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "the next month",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f1037dfc-f0cc-4490-bb54-3972bbb0480d",
+    "data": [
+      {
+        "text": "I wanna go to ",
+        "userDefined": false
+      },
+      {
+        "text": "Lisbon",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "cdd8d527-744f-4a6b-a4ba-d543844c2ce4",
+    "data": [
+      {
+        "text": "I feel like traveling to ",
+        "userDefined": false
+      },
+      {
+        "text": "Porto",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "the next week",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "two weeks",
+        "alias": "duration",
+        "meta": "@sys.duration",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d0bf5a22-c5b8-4f05-b31b-a607c646841d",
+    "data": [
+      {
+        "text": "When I feel like traveling to ",
+        "userDefined": false
+      },
+      {
+        "text": "Porto",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": false
+      },
+      {
+        "text": " in ",
+        "userDefined": false
+      },
+      {
+        "text": "the next week",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "a month",
+        "alias": "duration",
+        "meta": "@sys.duration",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "789bdd40-aaf9-4ef1-8e87-b88a5b38d0c3",
+    "data": [
+      {
+        "text": "I want to go to ",
+        "userDefined": false
+      },
+      {
+        "text": "Dublin",
+        "alias": "geo_city",
+        "meta": "@sys.geo-city",
+        "userDefined": false
+      },
+      {
+        "text": " in the ",
+        "userDefined": false
+      },
+      {
+        "text": "next March",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "two days",
+        "alias": "duration",
+        "meta": "@sys.duration",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]
