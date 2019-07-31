@@ -237,11 +237,11 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
 
 const getHostels = (city, date, map_sort, hostel_type, duration, room_type, guest_num) => {
     console.log(`Getting properties for > ${city.name} <`);
-    const dateStart = getCurrDate(date, 'date-start');
-    const numNights = duration ? `num-nights=${convertToDays(duration)}&` : 'num-nights=2&';
+    const dateStart = addDays(date, room_type ? { unit: 'day', amount: 30 } : 0, 'date-start');
+    const numNights = `num-nights=${convertToDays(duration)}&`;
     const mapSort = map_sort ? 'sort=' + map_sort + '&' : '';
     const hostelType = hostel_type ? 'property-type=' + hostel_type + '&' : '';
-    const roomType = room_type ? '&room-type=dorm' + room_type : '';
+    const roomType = room_type ? '&room-type=' + room_type : '';
     const guests = guest_num ? 'guests=' + guest_num + '&' : '';
 
     const URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${dateStart + numNights + mapSort + guests}currency=EUR&page=1&per-page=4&${hostelType}property-num-images=1${roomType}`;
@@ -281,10 +281,10 @@ const convertToDays = duration => {
             return duration.amount * 7;
 
         case 'mo':
-            return duration.amount * 30;
+            return 30;
 
         default:
-            return false;
+            return 2;
     }
 };
 
@@ -339,7 +339,7 @@ const addDays = (date, duration, query) => {
     } else {
         nextDate = new Date();
     }
-    nextDate.setUTCDate(nextDate.getUTCDate() + (duration ? convertToDays(duration) : 2));
+    nextDate.setUTCDate(nextDate.getUTCDate() + convertToDays(duration));
     const dateString = `${nextDate.getUTCFullYear()}-${('0' + (nextDate.getUTCMonth() + 1)).slice(-2)}-${('0' + nextDate.getUTCDate()).slice(-2)}`;
     return `${query}=${dateString}&`;
 };
