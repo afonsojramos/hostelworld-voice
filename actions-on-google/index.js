@@ -8,7 +8,7 @@ const functions = require('firebase-functions');
 // Instantiate the Dialogflow client.
 const app = dialogflow({ debug: true });
 
-app.intent('Dreaming Phase', (conv, { date, geo_city, duration, map_sort, room_type, hostel_type }) => {
+app.intent('Dreaming Phase', (conv, { date, geo_city, duration, map_sort, room_type, hostel_type, guest_num }) => {
     return getIDfromText(geo_city)
         .then(searchResponse => {
             const parsedSearch = JSON.parse(searchResponse);
@@ -19,7 +19,7 @@ app.intent('Dreaming Phase', (conv, { date, geo_city, duration, map_sort, room_t
 
             conv.ask(`I think you will enjoy my picks for ${city.name}!`);
 
-            return getHostels(city, date, map_sort, hostel_type, duration, room_type)
+            return getHostels(city, date, map_sort, hostel_type, duration, room_type, guest_num)
                 .then(propertiesResponse => {
                     const parsedProperties = JSON.parse(propertiesResponse).properties;
                     console.log(parsedProperties);
@@ -31,6 +31,41 @@ app.intent('Dreaming Phase', (conv, { date, geo_city, duration, map_sort, room_t
                     console.log(err);
                     return Promise.resolve(err);
                 });
+        })
+        .catch(err => {
+            conv.ask('Uh oh, something bad happened... Please try again later!');
+            console.log(err);
+            return Promise.resolve(err);
+        });
+});
+
+app.intent('Dreaming Phase - Hostel Selection', (conv, params, option) => {
+    const { date, duration, guest_num } = conv.contexts.input[`dreaming-context`].parameters;
+    return getHostel(option)
+        .then(detailedPropertyResponse => {
+            const detailedProperty = JSON.parse(detailedPropertyResponse);
+
+            const dateFrom = getCurrDate(date, 'dateFrom');
+            const dateTo = addDays(date, duration, 'dateTo');
+            const URI = `https://www.hostelworld.com/hosteldetails.php/${detailedProperty.id}?${dateFrom + dateTo}number_of_guests=${guest_num}`;
+            console.log(URI);
+
+            conv.ask(
+                `${detailedProperty.name} seems like a great choice! Click below to learn more!`,
+                new BasicCard({
+                    text: detailedProperty.description.substring(0, 256) + '...',
+                    subtitle: `${detailedProperty.city.name}, ${detailedProperty.city.country}`,
+                    title: detailedProperty.name,
+                    buttons: new Button({
+                        title: 'Find out more',
+                        url: URI
+                    }),
+                    image: {
+                        url: 'https://' + detailedProperty.images[0].prefix + detailedProperty.images[0].suffix,
+                        alt: detailedProperty.name
+                    }
+                })
+            );
         })
         .catch(err => {
             conv.ask('Uh oh, something bad happened... Please try again later!');
@@ -200,15 +235,16 @@ app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }
     }
 });
 
-const getHostels = (city, date, map_sort, hostel_type, duration, room_type) => {
+const getHostels = (city, date, map_sort, hostel_type, duration, room_type, guest_num) => {
     console.log(`Getting properties for > ${city.name} <`);
     const dateStart = getCurrDate(date, 'date-start');
     const numNights = duration ? `num-nights=${convertToDays(duration)}&` : 'num-nights=2&';
     const mapSort = map_sort ? 'sort=' + map_sort + '&' : '';
     const hostelType = hostel_type ? 'property-type=' + hostel_type + '&' : '';
     const roomType = room_type ? '&room-type=dorm' + room_type : '';
+    const guests = guest_num ? 'guests=' + guest_num + '&' : '';
 
-    const URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${dateStart + numNights + mapSort}currency=EUR&page=1&per-page=4&${hostelType}property-num-images=1${roomType}`;
+    const URI = `https://api.m.hostelworld.com/2.1/cities/${city.id}/properties/?${dateStart + numNights + mapSort + guests}currency=EUR&page=1&per-page=4&${hostelType}property-num-images=1${roomType}`;
 
     console.log(URI);
 
