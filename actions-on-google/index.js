@@ -147,7 +147,7 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
                 console.log(err);
                 return Promise.resolve(err);
             });
-    } else if (location.city) {
+    } else if (location && location.city) {
         return getIDfromText(location.city)
             .then(searchResponse => {
                 const parsedSearch = JSON.parse(searchResponse);
