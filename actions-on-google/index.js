@@ -1,7 +1,7 @@
 'use strict';
 
 // Import the Dialogflow module from the Actions on Google client library.
-const { dialogflow, BasicCard, Permission, Button, Carousel } = require('actions-on-google');
+const { dialogflow, BasicCard, Permission, Button, Carousel, NewSurface } = require('actions-on-google');
 const rp = require('request-promise');
 const functions = require('firebase-functions');
 
@@ -24,7 +24,7 @@ app.intent('Dreaming Phase', (conv, { date, geo_city, duration, map_sort, room_t
                     const parsedProperties = JSON.parse(propertiesResponse).properties;
                     console.log(parsedProperties);
 
-                    conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                    conv.ask(createPropertiesCarousel(city, parsedProperties, conv));
                 })
                 .catch(err => {
                     conv.ask('Uh oh, something bad happened... Please try again later!');
@@ -37,6 +37,57 @@ app.intent('Dreaming Phase', (conv, { date, geo_city, duration, map_sort, room_t
             console.log(err);
             return Promise.resolve(err);
         });
+});
+
+app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }) => {
+    if (geo_city === '') {
+        var options;
+
+        if (conv.screen) {
+            options = {
+                context: 'To address you by name and know your location',
+                permissions: ['NAME', 'DEVICE_PRECISE_LOCATION']
+            };
+        } else {
+            options = {
+                context: 'To address you by name and know your location',
+                permissions: ['NAME', 'DEVICE_COARSE_LOCATION']
+            };
+        }
+        conv.ask(new Permission(options));
+    } else {
+        return getIDfromText(geo_city)
+            .then(searchResponse => {
+                const parsedSearch = JSON.parse(searchResponse);
+
+                const city = parsedSearch.find(element => element.type === 'city');
+
+                console.log(city);
+
+                return getHostels(city, date, map_sort, hostel_type, duration)
+                    .then(propertiesResponse => {
+                        const parsedProperties = JSON.parse(propertiesResponse).properties;
+                        console.log(parsedProperties);
+
+                        if (parsedProperties.length > 0) {
+                            conv.ask(`These are my recommendations for ${city.name}!`);
+                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv));
+                        } else {
+                            conv.ask(`I'm sorry but I couldn't find anything near ${city.name}`);
+                        }
+                    })
+                    .catch(err => {
+                        conv.ask('Uh oh, something bad happened... Please try again later!');
+                        console.log(err);
+                        return Promise.resolve(err);
+                    });
+            })
+            .catch(err => {
+                conv.ask('Uh oh, something bad happened... Please try again later!');
+                console.log(err);
+                return Promise.resolve(err);
+            });
+    }
 });
 
 app.intent('Dreaming Phase - Hostel Selection', (conv, params, option) => {
@@ -131,7 +182,7 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
 
                         if (parsedProperties.length > 0) {
                             conv.ask(`These are my recommendations for ${city.name}!`);
-                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv));
                         } else {
                             conv.ask(`I'm sorry but I couldn't find anything near ${city.name}`);
                         }
@@ -163,7 +214,7 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
 
                         if (parsedProperties.length > 0) {
                             conv.ask(`These are my recommendations for ${city.name}!`);
-                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
+                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv));
                         } else {
                             conv.ask(`I'm sorry but I couldn't find anything near ${city.name}`);
                         }
@@ -184,54 +235,29 @@ app.intent('Hostels - Permission Confirmed', (conv, params, confirmationGranted)
     }
 });
 
-app.intent('Hostels', (conv, { date, geo_city, map_sort, hostel_type, duration }, confirmationGranted) => {
-    if (geo_city === '') {
-        var options;
-
-        if (conv.screen) {
-            options = {
-                context: 'To address you by name and know your location',
-                permissions: ['NAME', 'DEVICE_PRECISE_LOCATION']
-            };
-        } else {
-            options = {
-                context: 'To address you by name and know your location',
-                permissions: ['NAME', 'DEVICE_COARSE_LOCATION']
-            };
-        }
-        conv.ask(new Permission(options));
-    } else {
-        return getIDfromText(geo_city)
-            .then(searchResponse => {
-                const parsedSearch = JSON.parse(searchResponse);
-
-                const city = parsedSearch.find(element => element.type === 'city');
-
-                console.log(city);
-
-                return getHostels(city, date, map_sort, hostel_type, duration)
-                    .then(propertiesResponse => {
-                        const parsedProperties = JSON.parse(propertiesResponse).properties;
-                        console.log(parsedProperties);
-
-                        if (parsedProperties.length > 0) {
-                            conv.ask(`These are my recommendations for ${city.name}!`);
-                            conv.ask(createPropertiesCarousel(city, parsedProperties, conv.screen));
-                        } else {
-                            conv.ask(`I'm sorry but I couldn't find anything near ${city.name}`);
-                        }
-                    })
-                    .catch(err => {
-                        conv.ask('Uh oh, something bad happened... Please try again later!');
-                        console.log(err);
-                        return Promise.resolve(err);
-                    });
+app.intent('Hostels - New Surface', (conv, input, newSurface) => {
+    if (newSurface.status === 'OK') {
+        conv.close(
+            `These are my recommendations for ${conv.data.city}!`,
+            new Carousel({
+                items: conv.data.items
             })
-            .catch(err => {
-                conv.ask('Uh oh, something bad happened... Please try again later!');
-                console.log(err);
-                return Promise.resolve(err);
-            });
+        );
+    } else {
+        conv.close(`Ok, I understand. You don't want to see my recomendations. I am sad.`);
+    }
+});
+
+app.intent('Dreaming Phase - New Surface', (conv, input, newSurface) => {
+    if (newSurface.status === 'OK') {
+        conv.close(
+            `These are my recommendations for ${conv.data.city}!`,
+            new Carousel({
+                items: conv.data.items
+            })
+        );
+    } else {
+        conv.close(`Ok, I understand. You don't want to see my recomendations. I am sad.`);
     }
 });
 
@@ -344,28 +370,36 @@ const addDays = (date, duration, query) => {
     return `${query}=${dateString}&`;
 };
 
-const createPropertiesCarousel = (city, parsedProperties, screen) => {
-    if (screen) {
-        const items = [];
-        parsedProperties.map(prop => {
-            const result = {
-                optionInfo: {
-                    key: `${prop.id}`
-                },
-                title: `${prop.name}`,
-                description: `${prop.overallRating ? prop.overallRating.overall / 10 : '??'}/10!`,
-                image: {
-                    url: `https://${prop.images[0].prefix + prop.images[0].suffix}`,
-                    accessibilityText: `${prop.name}`
-                }
-            };
+const createPropertiesCarousel = (city, parsedProperties, conv) => {
+    const items = [];
+    parsedProperties.map(prop => {
+        const result = {
+            optionInfo: {
+                key: `${prop.id}`
+            },
+            title: `${prop.name}`,
+            description: `${prop.overallRating ? prop.overallRating.overall / 10 : '??'}/10!`,
+            image: {
+                url: `https://${prop.images[0].prefix + prop.images[0].suffix}`,
+                accessibilityText: `${prop.name}`
+            }
+        };
+        items.push(result);
+    });
 
-            items.push(result);
-        });
-
+    if (conv.screen) {
         return new Carousel({
             items: items
         });
+    } else if (conv.available.surfaces.capabilities.has('actions.capability.SCREEN_OUTPUT')) {
+        const context = 'Check out my suggestions!';
+        const notification = "Hostelworld's Suggestions";
+        const capabilities = ['actions.capability.SCREEN_OUTPUT'];
+
+        conv.data.items = items;
+        conv.data.city = city.name;
+
+        return new NewSurface({ context, notification, capabilities });
     } else {
         var verbalOutput = `${city.name}'s Top ${parsedProperties.length} properties are comprised of `;
 
