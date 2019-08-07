@@ -8,6 +8,11 @@
       "resetContexts": false,
       "affectedContexts": [
         {
+          "name": "DreamingPhase-followup",
+          "parameters": {},
+          "lifespan": 2
+        },
+        {
           "name": "dreaming-context",
           "parameters": {},
           "lifespan": 20
@@ -16,7 +21,7 @@
       "parameters": [
         {
           "id": "b529b33f-489c-446d-ad44-660baf433c77",
-          "required": true,
+          "required": false,
           "dataType": "@sys.date",
           "name": "date",
           "value": "$date",
@@ -33,6 +38,7 @@
           "promptMessages": [],
           "noMatchPromptMessages": [],
           "noInputPromptMessages": [],
+          "outputDialogContexts": [],
           "isList": false
         },
         {
@@ -44,12 +50,13 @@
           "prompts": [
             {
               "lang": "en",
-              "value": "And where do you want to go exactly?"
+              "value": "Great! Where do you want to go exactly?"
             }
           ],
           "promptMessages": [],
           "noMatchPromptMessages": [],
           "noInputPromptMessages": [],
+          "outputDialogContexts": [],
           "isList": false
         },
         {
@@ -67,6 +74,7 @@
           "promptMessages": [],
           "noMatchPromptMessages": [],
           "noInputPromptMessages": [],
+          "outputDialogContexts": [],
           "isList": false
         },
         {
@@ -84,6 +92,7 @@
           "promptMessages": [],
           "noMatchPromptMessages": [],
           "noInputPromptMessages": [],
+          "outputDialogContexts": [],
           "isList": false
         },
         {
@@ -101,11 +110,12 @@
           "promptMessages": [],
           "noMatchPromptMessages": [],
           "noInputPromptMessages": [],
+          "outputDialogContexts": [],
           "isList": false
         },
         {
           "id": "0946a127-d068-4d8a-902b-eb42485312f4",
-          "required": true,
+          "required": false,
           "dataType": "@hostel-type",
           "name": "hostel_type",
           "value": "$hostel_type",
@@ -118,6 +128,25 @@
           "promptMessages": [],
           "noMatchPromptMessages": [],
           "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "c6ad9f84-3ccb-4296-9ae2-8b148098678f",
+          "required": true,
+          "dataType": "@sys.number-integer",
+          "name": "guest_num",
+          "value": "$guest_num",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "And to top it off, how many guests?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
           "isList": false
         }
       ],

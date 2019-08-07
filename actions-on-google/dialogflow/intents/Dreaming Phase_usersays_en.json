@@ -1,5 +1,123 @@
 [
   {
+    "id": "f3cb7d99-9736-4192-a9d5-0313db99fdbd",
+    "data": [
+      {
+        "text": "let\u0027s go on a trip in ",
+        "userDefined": false
+      },
+      {
+        "text": "a week",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "6e649559-6f27-49d3-abf3-c13e7f45d22a",
+    "data": [
+      {
+        "text": "In ",
+        "userDefined": false
+      },
+      {
+        "text": "two weeks",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": false
+      },
+      {
+        "text": " I\u0027m going on a trip",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "2104becf-04de-4da3-b5b0-6348a0b0ccc3",
+    "data": [
+      {
+        "text": "I am going on a trip in ",
+        "userDefined": false
+      },
+      {
+        "text": "two weeks",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "1427a91c-d6a8-46ae-9731-560df2bdf609",
+    "data": [
+      {
+        "text": "Next week",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "5 days",
+        "alias": "duration",
+        "meta": "@sys.duration",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "90f97a00-1343-4305-994b-f3aaf11ffb25",
+    "data": [
+      {
+        "text": "I am going on a trip ",
+        "userDefined": false
+      },
+      {
+        "text": "next week",
+        "alias": "date",
+        "meta": "@sys.date",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "fbaab5f4-6c06-479f-97e1-d6d0787e790a",
+    "data": [
+      {
+        "text": "We\u0027ll be ",
+        "userDefined": false
+      },
+      {
+        "text": "5 guests",
+        "alias": "guest_num",
+        "meta": "@sys.number-integer",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
     "id": "509c1504-121f-4a36-b8fe-23a28702fefc",
     "data": [
       {
@@ -21,11 +139,11 @@
     "id": "d564e882-8f67-426c-bff6-a9643b138b55",
     "data": [
       {
-        "text": "Let\u0027s travel ",
+        "text": "Let\u0027s travel in ",
         "userDefined": false
       },
       {
-        "text": "in two months",
+        "text": "two months",
         "alias": "date",
         "meta": "@sys.date",
         "userDefined": false
@@ -143,11 +261,11 @@
         "userDefined": true
       },
       {
-        "text": " in ",
+        "text": " in the ",
         "userDefined": false
       },
       {
-        "text": "the next month",
+        "text": "next month",
         "alias": "date",
         "meta": "@sys.date",
         "userDefined": true
@@ -189,11 +307,11 @@
         "userDefined": false
       },
       {
-        "text": " in ",
+        "text": " in the ",
         "userDefined": false
       },
       {
-        "text": "the next week",
+        "text": "next week",
         "alias": "date",
         "meta": "@sys.date",
         "userDefined": true
@@ -227,11 +345,11 @@
         "userDefined": false
       },
       {
-        "text": " in ",
+        "text": " in the ",
         "userDefined": false
       },
       {
-        "text": "the next week",
+        "text": "next week",
         "alias": "date",
         "meta": "@sys.date",
         "userDefined": true

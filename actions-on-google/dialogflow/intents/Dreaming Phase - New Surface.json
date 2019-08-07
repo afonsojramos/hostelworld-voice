@@ -1,0 +1,37 @@
+{
+  "id": "064b7313-51a0-48aa-ae6f-682731eeb563",
+  "parentId": "91308f8a-4035-42aa-96dd-32728eabf9f7",
+  "rootParentId": "91308f8a-4035-42aa-96dd-32728eabf9f7",
+  "name": "Dreaming Phase - New Surface",
+  "auto": true,
+  "contexts": [
+    "DreamingPhase-followup",
+    "dreaming-context"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "DreamingPhase.DreamingPhase-custom",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "actions_intent_NEW_SURFACE"
+    }
+  ]
+}

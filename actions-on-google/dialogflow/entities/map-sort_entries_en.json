@@ -20,11 +20,16 @@
   {
     "value": "-rating",
     "synonyms": [
-      "bad rated",
-      "bad rating",
-      "low rating",
-      "worst",
-      "worst rating"
+      "best",
+      "cool",
+      "fine",
+      "good",
+      "great",
+      "high rating",
+      "highest rated",
+      "interesting",
+      "nice",
+      "top"
     ]
   },
   {
@@ -76,16 +81,11 @@
   {
     "value": "rating",
     "synonyms": [
-      "best",
-      "cool",
-      "fine",
-      "good",
-      "great",
-      "high rating",
-      "highest rated",
-      "interesting",
-      "nice",
-      "top"
+      "bad rated",
+      "bad rating",
+      "low rating",
+      "worst",
+      "worst rating"
     ]
   }
 ]
