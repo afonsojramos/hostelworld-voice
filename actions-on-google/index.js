@@ -17,13 +17,12 @@ app.intent('Dreaming Phase', (conv, { date, geo_city, duration, map_sort, room_t
 
             console.log(city);
 
-            conv.ask(`I think you will enjoy my picks for ${city.name}!`);
-
             return getHostels(city, date, map_sort, hostel_type, duration, room_type, guest_num)
                 .then(propertiesResponse => {
                     const parsedProperties = JSON.parse(propertiesResponse).properties;
                     console.log(parsedProperties);
 
+                    conv.ask(`I think you will enjoy my picks for ${city.name}!`);
                     conv.ask(createPropertiesCarousel(city, parsedProperties, conv));
                 })
                 .catch(err => {
