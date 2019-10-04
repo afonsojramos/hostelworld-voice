@@ -2,6 +2,8 @@
 
 ![hostelworld](http://www.hostelworldgroup.com/~/media/Images/H/Hostelworld-v2/image-gallery/logos/master-lock-up-light-backgrounds.png)
 
+This project was made over around 4 weeks, where after those 4 weeks I worked on a project for the HostelWorld API where speeds were increased on up to 20x.
+
 ## Index
 
 1. [Platforms](#Platforms)
