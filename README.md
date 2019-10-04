@@ -7,9 +7,9 @@ This project was made over around 4 weeks, where after those 4 weeks I worked on
 ## Index
 
 1. [Platforms](#Platforms)
-    1. [Platform Choices](##Platform-Choices)
-    2. [Platform Performance](##Platform-Performance)
-    3. [Platform Choice Conclusion](##Platform-Choice-Conclusion)
+   1. [Platform Choices](##Platform-Choices)
+   2. [Platform Performance](##Platform-Performance)
+   3. [Platform Choice Conclusion](##Platform-Choice-Conclusion)
 2. [Dialogflow Implementation](#Dialogflow-Implementation)
 
 # Platforms
@@ -40,26 +40,26 @@ All in all, it comes to the following differences:
 
 **_Dialogflow_**
 
--   Most complete tool for the creation of a chatbot, doing almost everything you need for most chatbots.
--   Handles classification of `intents` and `entities`, and uses what it calls `context` to handle `dialogue`. Allows webhooks for `fulfillment`.
--   One thing it does not have that is often desirable for chatbots is some form of end user management.
--   It has a robust API, which allows you to define `entities`/`intents`/etc either via the API or their web based interface.
--   Cannot be operated on premise.
+- Most complete tool for the creation of a chatbot, doing almost everything you need for most chatbots.
+- Handles classification of `intents` and `entities`, and uses what it calls `context` to handle `dialogue`. Allows webhooks for `fulfillment`.
+- One thing it does not have that is often desirable for chatbots is some form of end user management.
+- It has a robust API, which allows you to define `entities`/`intents`/etc either via the API or their web based interface.
+- Cannot be operated on premise.
 
 **_Rasa NLU + Core_**
 
--   To get close to the same level of functionality as Dialogflow you have to use both Rasa NLU and Rasa Core. Rasa NLU handles `projects`/`intents`/`entities` whereas Rasa Core handles `dialogue` and `fulfillment`.
--   Rasa doesn't provide a complete open source GUI leaving most of your interactions with NLU in JSON or markdown. And Rasa Core requires direct python development to customize your bot.
--   Also does not directly offer any sort of user info management.
--   The Rasa team does not provide hosting (at least outside of their enterprise offerings) and you will be **responsible for hosting** and thus **ownership of the data**.
--   Can be operated on premise.
+- To get close to the same level of functionality as Dialogflow you have to use both Rasa NLU and Rasa Core. Rasa NLU handles `projects`/`intents`/`entities` whereas Rasa Core handles `dialogue` and `fulfillment`.
+- Rasa doesn't provide a complete open source GUI leaving most of your interactions with NLU in JSON or markdown. And Rasa Core requires direct python development to customize your bot.
+- Also does not directly offer any sort of user info management.
+- The Rasa team does not provide hosting (at least outside of their enterprise offerings) and you will be **responsible for hosting** and thus **ownership of the data**.
+- Can be operated on premise.
 
 Taking these differences into account, **Dialogflow** is the most complete, and thus, the obvious choice for assistant development. However, there is a full-featured bot framework called [**Articulate**](https://spg.ai/projects/articulate/) that is being developed on [GitHub](https://github.com/samtecspg/articulate) which:
 
--   Uses **Rasa NLU** for understanding and custom context based code for dialogue, making it work closer to how **Dialogflow** does than **Rasa Core**;
--   Has a `HTTP API` for creating `intents`, `entities`, and interacting with `agents`;
--   Presents itself with a GUI similar to Dialogflow that is fully open source;
--   Data and interface can be hosted in the cloud or on premise.
+- Uses **Rasa NLU** for understanding and custom context based code for dialogue, making it work closer to how **Dialogflow** does than **Rasa Core**;
+- Has a `HTTP API` for creating `intents`, `entities`, and interacting with `agents`;
+- Presents itself with a GUI similar to Dialogflow that is fully open source;
+- Data and interface can be hosted in the cloud or on premise.
 
 It is hard to say what to expect of the future, and impossible to predict which platform will become the best and most complete one, since Articulate, being Open-Source, might overrun Dialogflow, but Dialogflow can also go Open-Source, making the future uncertain. Nevertheless, for now, Dialogflow wins and it will be our pick.
 
@@ -69,12 +69,12 @@ A Dialogflow's "application" is called an `agent`, and to access its full featur
 
 First of all, let's try to understand some of the concepts:
 
--   [Agents](https://cloud.google.com/dialogflow/docs/agents-overview)
--   [Intents](https://cloud.google.com/dialogflow/docs/intents-overview)
--   [Entities](https://cloud.google.com/dialogflow/docs/entities-overview)
--   [Contexts](https://cloud.google.com/dialogflow/docs/contexts-input-output)
--   [Events](https://cloud.google.com/dialogflow/docs/events-overview)
--   [Fulfillment](https://cloud.google.com/dialogflow/docs/fulfillment-overview)
+- [Agents](https://cloud.google.com/dialogflow/docs/agents-overview)
+- [Intents](https://cloud.google.com/dialogflow/docs/intents-overview)
+- [Entities](https://cloud.google.com/dialogflow/docs/entities-overview)
+- [Contexts](https://cloud.google.com/dialogflow/docs/contexts-input-output)
+- [Events](https://cloud.google.com/dialogflow/docs/events-overview)
+- [Fulfillment](https://cloud.google.com/dialogflow/docs/fulfillment-overview)
 
 When working with **fulfillment** it is also necessary to understand concepts **Webhooks**. A Webhook (also called a web callback or HTTP push API) is a way for an app to provide other applications with real-time information. A webhook delivers data to other applications as it happens, meaning you get data immediately. Unlike typical APIs where you would need to poll for data very frequently in order to get it real-time. This makes webhooks much more efficient for both provider and consumer. The only drawback to webhooks is the difficulty of initially setting them up, but in this case we have the [WebhookClient](https://dialogflow.com/docs/reference/fulfillment-library/webhook-client) class that handles the communication with Dialogflow's webhook fulfillment API with support for rich responses across the 8 supported platforms. While if you want to customise the UI presented at visual assistants you should take a look at [Rich Responses in Dialogflow](https://dialogflow.com/docs/reference/fulfillment-library/rich-responses) and [Actions on Google Responses](https://developers.google.com/actions/assistant/responses).
 
